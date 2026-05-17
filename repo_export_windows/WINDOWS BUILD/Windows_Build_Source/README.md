@@ -4,8 +4,8 @@
 `SCU_CBoards.py` is an offline desktop app that converts a pasted clinic schedule into patient-specific PDF clipboard packets.
 
 Primary goals:
-- Keep PHI local (no cloud/database/network dependencies).
-- Let staff paste directly from Sheets/Excel and quickly verify output.
+- Keep PHI local with no network/database dependency.
+- Let staff paste directly from Sheets/Excel and verify packets quickly.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Download Here
@@ -13,7 +13,7 @@ Primary goals:
 - Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
 
 ## Current Folder Layout
-The local workspace is organized into these long-term buckets:
+The workspace is organized into four long-term buckets:
 
 ```text
 SCU/
@@ -29,7 +29,7 @@ SCU/
 │   ├── Windows_Build_Source/
 │   └── repo_export_windows/
 ├── OTHER FILES/
-└── (top-level source/docs/assets still in active use)
+└── top-level source/docs/assets still in active use
 ```
 
 Practical intent:
@@ -77,17 +77,18 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 - Paste directly from clipboard (tab/newline grid).
 - Staff can edit cells directly in the grid after paste.
 - The patient preview auto-refreshes when spreadsheet cells are edited.
-- If pasted row 1 looks like headers, the app uses those pasted headers immediately to align incoming values into the app's fixed columns.
-- The pasted header row itself is treated as mapping metadata and is not left behind as a patient row in the spreadsheet body.
-- If no header row is pasted, app falls back to built-in default headers.
+- Leading blank pasted rows are automatically removed before import.
+- If pasted row 1 looks like headers, the app uses those headers immediately to align incoming values into the app’s fixed columns.
+- The pasted header row is treated as mapping metadata and is not left behind as a patient row in the spreadsheet body.
+- If no header row is pasted, the app falls back to built-in default headers and shows a warning asking staff to include headers.
+- After a header-row paste, the app shows:
+  - a `Column Check` popup saying whether recognized columns already match or were re-aligned
+  - a second `Ignored Columns` popup if unsupported columns such as `SOMA` were skipped
 - Any non-blank marker in optional form columns counts as selected (`x`, `need`, `fill`, etc.).
-- If a no-header paste looks shifted left by one column, the app prompts the user immediately after paste.
-- `Yes` shifts the visible spreadsheet one column to the right so the UI matches the intended columns.
-- `No` keeps the spreadsheet and preview exactly as pasted, with no hidden correction.
-- `Cancel` dismisses the shift action and leaves the pasted grid unchanged.
-- When a visible shift is applied, the info log records only the first populated row's moved values and target headers.
+- If a true no-header paste looks shifted left by one column, the app still offers the older right-shift correction flow.
+- When a visible shift is applied, the info log records only the first populated row’s moved values and target headers.
 - PDF generation rebuilds patient data from the current spreadsheet automatically, so staff do not need to click **Build Patient Preview** before generating.
-- Demo rows named `Al Demo` / `al demo` are excluded from the patient preview and generated outputs.
+- Demo rows named `Al Demo` / `al demo` are excluded from preview and generated outputs.
 
 ---
 
@@ -155,25 +156,25 @@ Extra optional forms not in the explicit map are inserted **before** `vitals_she
 ---
 
 ## Language Handling and Fallbacks
-Normalized language output examples:
+Normalized language outputs:
 - `english`
 - `spanish`
 - `mandarin`
 
 Input normalization supports:
-- Multi-language cells (`Spanish, English`, `English / Arabic`, etc.)
-- Mixed separators (`/`, `,`, `;`, `|`, `&`, `and`)
-- Extra spaces and noisy text
+- multi-language cells (`Spanish, English`, `English / Arabic`, etc.)
+- mixed separators (`/`, `,`, `;`, `|`, `&`, `and`)
+- extra spaces and noisy text
 
 Priority rule:
 - If English appears anywhere in a multi-language value, language resolves to `english`.
 
 Per-form path resolution order:
-1. Requested language folder (e.g., `ClinicForms/spanish/`)
+1. requested language folder (for example `ClinicForms/spanish/`)
 2. `ClinicForms/default/`
 3. `ClinicForms/english/`
 
-Preview shows the source label:
+Preview/source labels:
 - `(english)`, `(spanish)`, `(mandarin)`
 - `(default fallback)`
 - `(fallback english)`
@@ -192,7 +193,7 @@ APP SOURCE/ClinicForms/
 └── default/
 ```
 
-Accepted filename variants for base file `phq9.pdf`:
+Accepted filename variants for a base file like `phq9.pdf`:
 - `phq9 (spanish).pdf`
 - `phq9 (mandarin).pdf`
 - `phq9_spanish.pdf`
@@ -217,25 +218,25 @@ The resolver prefers language-labeled variants before plain filename.
 
 ## Resource Loading (Dev vs Bundled App)
 Resource discovery supports:
-- Running from source folder
-- Running from PyInstaller `.app` bundle
+- running from source
+- running from the packaged `.app`
 
-Assets/forms used in packaged builds:
+Bundled runtime assets:
 - `ClinicForms/`
 - `logo.png`
 - `white_logo_ui.png`
 
-During local development, the app now auto-detects forms from:
+During local development, the app auto-detects forms from:
 - `APP SOURCE/ClinicForms/`
 - or bundled `ClinicForms/` inside packaged builds
 
-Log path output is sanitized for cleaner/non-personal display where possible.
+Displayed log paths are sanitized to avoid personal path leakage.
 
 ---
 
-## Run Locally (Conda `gnarnia`)
+## Run Locally
 ```bash
-cd "/Users/jamessobieski/Documents/SCU"
+cd "/path/to/SCU"
 eval "$(conda shell.bash hook)" && conda activate gnarnia
 python SCU_CBoards.py
 ```
@@ -244,7 +245,7 @@ python SCU_CBoards.py
 
 ## Build macOS App (PyInstaller)
 ```bash
-cd "/Users/jamessobieski/Documents/SCU"
+cd "/path/to/SCU"
 rm -rf "MAC BUILD/build" "MAC BUILD/dist" "MAC BUILD/mac_build"
 eval "$(conda shell.bash hook)" && conda activate gnarnia
 pyinstaller --clean --windowed --noconsole \
@@ -259,57 +260,38 @@ pyinstaller --clean --windowed --noconsole \
   SCU_CBoards.py
 ```
 
-Build artifact:
+Build artifacts:
 - `MAC BUILD/dist/SCU_Clipboard_Builder.app`
-- Shareable Mac zip (recommended for Google Drive/email):
-  - `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`
-- Mac-specific PyInstaller spec file:
-  - `MAC BUILD/mac_build/SCU_Clipboard_Builder.spec`
+- `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`
+- `MAC BUILD/mac_build/SCU_Clipboard_Builder.spec`
 
 ---
 
 ## Build Windows App (PyInstaller)
-The app logic is already mostly cross-platform because it uses:
-- `PySide6`
-- `pandas`
-- `pypdf`
-- `reportlab`
-
-To create a real Windows app, build it on a Windows machine (or Windows VM). PyInstaller should be run from Windows so it can produce a native `.exe`.
-
 Windows-specific packaging files live in:
 - `WINDOWS BUILD/Windows_Build_Source/`
 
-This separation prevents the Windows packaging flow from overwriting the Mac app spec/build configuration.
-
-### Recommended setup on Windows
+Recommended setup on Windows:
 1. Install Python 3.10+.
 2. Make sure Python is available as either `py` or `python`.
-3. Optional: create or activate a virtual environment.
-4. If you want to build manually instead of using the batch file, install dependencies:
+3. If building manually, install:
 
 ```bash
 pip install pyside6 pypdf reportlab pandas openpyxl pyinstaller
 ```
 
-### Windows icon note
-Windows packaging expects an `.ico` file instead of `.icns`.
-
-If needed, create a Windows icon from the existing logo before building:
-- example target: `SCU_logo.ico`
-
-### Windows build command
-Important PyInstaller difference:
-- Windows uses `;` in `--add-data`
-- macOS uses `:`
+Windows icon note:
+- Windows expects an `.ico` file instead of `.icns`
+- optional icon target: `SCU_logo.ico`
 
 Fastest option on Windows:
-- Copy `WINDOWS BUILD/Windows_Build_Source/` to a real Windows-local folder first
-- Open the copied folder in Windows
-- Double-click `build_windows.bat`
-- It auto-detects `py` or `python`
-- It auto-installs/updates the required Python packages
-- It will build the app and place the executable in `dist_win\win_SCU_CBoards\`
+- copy `WINDOWS BUILD/Windows_Build_Source/` to a real Windows-local folder
+- open that copied folder in Windows
+- double-click `build_windows.bat`
+- it auto-detects Python
+- it installs/updates required packages
+- it builds into `dist_win\win_SCU_CBoards\`
+- it attempts to create `dist_win\win_SCU_CBoards.zip`
 
 Manual command-line option:
 
@@ -328,53 +310,48 @@ py -m PyInstaller --clean --windowed --noconfirm --name "win_SCU_CBoards" ^
   win_SCU_CBoards.py
 ```
 
-### Windows build output
+Windows build outputs:
 - `dist_win\win_SCU_CBoards\win_SCU_CBoards.exe`
-- Recommended shareable Windows deliverable:
-  - zip the entire `dist_win\win_SCU_CBoards\` folder
+- shareable zip: `dist_win\win_SCU_CBoards.zip`
 
-### Windows end-user workflow
-- Build the app once on a Windows machine.
-- Give the user the packaged `dist_win\win_SCU_CBoards\` folder.
-- The user can open `win_SCU_CBoards.exe` by double-clicking it.
-- No terminal is needed for the end user.
-
-### Windows testing checklist
-After building on Windows, verify:
-- the app opens normally
+Windows testing checklist:
+- app opens normally
 - `ClinicForms` is bundled and auto-detected
 - logo assets load correctly
-- paste into spreadsheet still works as expected
-- shift prompt appears for left-shifted no-header pastes
-- preview updates after spreadsheet edits
-- generated individual PDFs and batch PDFs open correctly
-- top-sheet text placement looks correct with Windows fonts/rendering
-
-### Windows packaging notes
-- Resource lookup in `SCU_CBoards.py` is already designed to work in both source and bundled environments.
-- Users should still be able to override the bundled forms via **Select Forms Folder**.
-- If one-file packaging is ever desired, it can be attempted later, but the current one-folder style is safer for testing resource-heavy desktop apps.
+- paste flow works
+- header popups work
+- preview updates on edits
+- individual and batch PDFs generate correctly
+- top-sheet text placement looks correct
 
 ---
 
 ## Distribution Notes
-- OneDrive download links for staff:
-  - macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
-  - Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
-- macOS staff should receive the full `MAC BUILD/dist/SCU_Clipboard_Builder.app` bundle, or preferably the zipped copy `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`.
-- First launch on a new Mac may require right-click -> **Open** due to Gatekeeper.
-- If macOS still blocks launch, users may need to use **Privacy & Security** -> **Open Anyway**.
-- Windows staff should receive the packaged `dist_win\win_SCU_CBoards\` folder, or a zip of that full folder.
-- Windows staff should not run `build_windows.bat`; that script is only for creating the Windows build.
-- After unzipping on Windows, staff can open `win_SCU_CBoards.exe` by double-clicking it.
-- Bundled builds include forms/assets added via `--add-data`.
-- Users can still override bundled forms via **Select Forms Folder**.
+OneDrive download links for staff:
+- macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
+- Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
+
+macOS staff:
+- download `SCU_Clipboard_Builder.app.zip`
+- unzip it
+- open `SCU_Clipboard_Builder.app`
+- if blocked, use right-click -> **Open**
+- if still blocked, use **Privacy & Security** -> **Open Anyway**
+
+Windows staff:
+- download `win_SCU_CBoards.zip`
+- extract all
+- open the extracted folder
+- double-click `win_SCU_CBoards.exe`
+- do not run `build_windows.bat`; that script is only for creating the Windows build
+
+Users can still override bundled forms via **Select Forms Folder**.
 
 ---
 
 ## Troubleshooting Quick Notes
-- **Top sheet fields scrambled**: use latest build with improved header detection and the shift-confirmation prompt for no-header pastes.
-- **Missing language form**: check fallback label in preview and verify file exists in `language`, `default`, or `english`.
+- **Top sheet fields scrambled**: use the latest build with header-based alignment and the no-header shift prompt fallback.
+- **Missing language form**: verify the file exists in the requested language, `default`, or `english`.
 - **Blurry/missing logo**: ensure `white_logo_ui.png` and `logo.png` are present and bundled.
-- **Mac build conflicts**: use the documented macOS rebuild command with `--specpath "MAC BUILD/mac_build"` so the Mac spec and output stay isolated.
-- **Windows build conflicts**: build only from the clean `WINDOWS BUILD/Windows_Build_Source/` copy after copying it to a real Windows-local folder.
+- **Mac build conflicts**: build into `MAC BUILD/` using the documented command.
+- **Windows build conflicts**: build only from a clean copied `WINDOWS BUILD/Windows_Build_Source/` folder on Windows.
