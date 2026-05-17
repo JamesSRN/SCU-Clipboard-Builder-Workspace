@@ -1,0 +1,24 @@
+# macOS metadata
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Mac build outputs
+MAC BUILD/build/
+MAC BUILD/dist/
+MAC BUILD/mac_build/
+MAC BUILD/repo_export_mac/
+
+# Windows build outputs / export staging
+WINDOWS BUILD/repo_export_windows/
+WINDOWS BUILD/Windows_Build_Source/win_SCU_CBoards.zip
+
+# Generated sample/debug PDFs
+Batch_Print_*.pdf
+Room_*.pdf
+_debug*.pdf
+
+# Other archival junk
+OTHER FILES/__pycache__/
