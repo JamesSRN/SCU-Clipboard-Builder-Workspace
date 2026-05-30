@@ -8,9 +8,8 @@ Primary goals:
 - Let staff paste directly from Sheets/Excel and quickly verify output.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
-## Download Here
-- macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
-- Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
+## Pre-built Apps
+Pre-built macOS and Windows app zips are distributed to staff through internal OneDrive/SharePoint. Contact your team lead for download links.
 
 ## Current Folder Layout
 The local workspace is organized into these long-term buckets:
@@ -235,7 +234,7 @@ Log path output is sanitized for cleaner/non-personal display where possible.
 
 ## Run Locally (Conda `gnarnia`)
 ```bash
-cd "/Users/jamessobieski/Documents/SCU"
+cd "/path/to/SCU"
 eval "$(conda shell.bash hook)" && conda activate gnarnia
 python SCU_CBoards.py
 ```
@@ -244,7 +243,7 @@ python SCU_CBoards.py
 
 ## Build macOS App (PyInstaller)
 ```bash
-cd "/Users/jamessobieski/Documents/SCU"
+cd "/path/to/SCU"
 rm -rf "MAC BUILD/build" "MAC BUILD/dist" "MAC BUILD/mac_build"
 eval "$(conda shell.bash hook)" && conda activate gnarnia
 pyinstaller --clean --windowed --noconsole \
@@ -358,9 +357,7 @@ After building on Windows, verify:
 ---
 
 ## Distribution Notes
-- OneDrive download links for staff:
-  - macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
-  - Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
+- Pre-built app zips are shared with staff through internal OneDrive/SharePoint. Contact your team lead for current download links.
 - macOS staff should receive the full `MAC BUILD/dist/SCU_Clipboard_Builder.app` bundle, or preferably the zipped copy `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`.
 - First launch on a new Mac may require right-click -> **Open** due to Gatekeeper.
 - If macOS still blocks launch, users may need to use **Privacy & Security** -> **Open Anyway**.

@@ -8,9 +8,8 @@ Primary goals:
 - Let staff paste directly from Sheets/Excel and verify packets quickly.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
-## Download Here
-- macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
-- Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
+## Pre-built Apps
+Pre-built macOS and Windows app zips are distributed to staff through internal OneDrive/SharePoint. Contact your team lead for download links.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -327,9 +326,7 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-OneDrive download links for staff:
-- macOS app zip: [SCU_Clipboard_Builder.app.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQDmNDK4cdFqTb_LBHnuQsoTAbp0K__EMv3jYaU9zvMidgo?e=XMDa99)
-- Windows app zip: [win_SCU_CBoards.zip](https://mcw0.sharepoint.com/:u:/s/BOD-SCU/IQCzyF6dq97pR6HtDdEo810ZAYrZ8pyl_PX9sJBoOKHWW34?e=AZDFLy)
+Pre-built app zips are shared with staff through internal OneDrive/SharePoint. Contact your team lead for current download links.
 
 macOS staff:
 - download `SCU_Clipboard_Builder.app.zip`
