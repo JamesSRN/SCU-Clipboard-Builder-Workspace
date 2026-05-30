@@ -9,7 +9,7 @@ Primary goals:
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
-- **Windows:** download [`WINDOWS BUILD/dist/win_SCU_CBoards.zip`](WINDOWS%20BUILD/dist/win_SCU_CBoards.zip) from this repo, extract all, then open `win_SCU_CBoards.exe`.
+- **Windows:** download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/win_SCU_CBoards.zip) from GitHub Releases, extract all, then open `win_SCU_CBoards.exe`.
 - **macOS:** distributed to staff through internal OneDrive/SharePoint. Contact your team lead for the Mac app zip.
 
 ## Current Folder Layout
@@ -328,7 +328,7 @@ Windows testing checklist:
 
 ## Distribution Notes
 Windows staff:
-- download [`WINDOWS BUILD/dist/win_SCU_CBoards.zip`](WINDOWS%20BUILD/dist/win_SCU_CBoards.zip) from this repo
+- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/win_SCU_CBoards.zip) from GitHub Releases
 - extract all
 - open the extracted folder
 - double-click `win_SCU_CBoards.exe`

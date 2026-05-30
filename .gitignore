@@ -18,6 +18,7 @@ WINDOWS BUILD/Windows_Build_Source/build_win/
 WINDOWS BUILD/Windows_Build_Source/dist_win/
 WINDOWS BUILD/Windows_Build_Source/win_SCU_CBoards.zip
 WINDOWS BUILD/Windows_Build_Source/win_SCU_CBoards.spec
+WINDOWS BUILD/dist/*.zip
 
 # Generated sample/debug PDFs
 Batch_Print_*.pdf
