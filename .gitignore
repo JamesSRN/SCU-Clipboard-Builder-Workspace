@@ -5,10 +5,9 @@
 __pycache__/
 *.pyc
 
-# Mac build outputs
+# Mac build outputs (keep spec; ignore large artifacts)
 MAC BUILD/build/
 MAC BUILD/dist/
-MAC BUILD/mac_build/
 MAC BUILD/repo_export_mac/
 
 # Windows build outputs / export staging
