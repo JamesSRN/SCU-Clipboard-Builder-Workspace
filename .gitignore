@@ -13,7 +13,11 @@ MAC BUILD/repo_export_mac/
 
 # Windows build outputs / export staging
 WINDOWS BUILD/repo_export_windows/
+WINDOWS BUILD/build_win/
+WINDOWS BUILD/Windows_Build_Source/build_win/
+WINDOWS BUILD/Windows_Build_Source/dist_win/
 WINDOWS BUILD/Windows_Build_Source/win_SCU_CBoards.zip
+WINDOWS BUILD/Windows_Build_Source/win_SCU_CBoards.spec
 
 # Generated sample/debug PDFs
 Batch_Print_*.pdf

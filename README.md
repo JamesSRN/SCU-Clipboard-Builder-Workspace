@@ -9,7 +9,8 @@ Primary goals:
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
-Pre-built macOS and Windows app zips are distributed to staff through internal OneDrive/SharePoint. Contact your team lead for download links.
+- **Windows:** download [`WINDOWS BUILD/dist/win_SCU_CBoards.zip`](WINDOWS%20BUILD/dist/win_SCU_CBoards.zip) from this repo, extract all, then open `win_SCU_CBoards.exe`.
+- **macOS:** distributed to staff through internal OneDrive/SharePoint. Contact your team lead for the Mac app zip.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -326,21 +327,19 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Pre-built app zips are shared with staff through internal OneDrive/SharePoint. Contact your team lead for current download links.
+Windows staff:
+- download [`WINDOWS BUILD/dist/win_SCU_CBoards.zip`](WINDOWS%20BUILD/dist/win_SCU_CBoards.zip) from this repo
+- extract all
+- open the extracted folder
+- double-click `win_SCU_CBoards.exe`
+- do not run `build_windows.bat`; that script is only for creating a new Windows build
 
 macOS staff:
-- download `SCU_Clipboard_Builder.app.zip`
+- download `SCU_Clipboard_Builder.app.zip` from your team lead (internal OneDrive/SharePoint)
 - unzip it
 - open `SCU_Clipboard_Builder.app`
 - if blocked, use right-click -> **Open**
 - if still blocked, use **Privacy & Security** -> **Open Anyway**
-
-Windows staff:
-- download `win_SCU_CBoards.zip`
-- extract all
-- open the extracted folder
-- double-click `win_SCU_CBoards.exe`
-- do not run `build_windows.bat`; that script is only for creating the Windows build
 
 Users can still override bundled forms via **Select Forms Folder**.
 

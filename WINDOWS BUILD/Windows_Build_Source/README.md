@@ -9,7 +9,8 @@ Primary goals:
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
-Pre-built macOS and Windows app zips are distributed to staff through internal OneDrive/SharePoint. Contact your team lead for download links.
+- **Windows:** download `WINDOWS BUILD/dist/win_SCU_CBoards.zip` from this repo, extract all, then open `win_SCU_CBoards.exe`.
+- **macOS:** distributed to staff through internal OneDrive/SharePoint. Contact your team lead for the Mac app zip.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:

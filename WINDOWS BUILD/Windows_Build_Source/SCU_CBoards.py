@@ -306,7 +306,9 @@ class ClinicApp(QMainWindow):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         candidates = [
             os.path.join(resource_base, "ClinicForms"),
+            os.path.join(resource_base, "APP SOURCE", "ClinicForms"),
             os.path.join(script_dir, "ClinicForms"),
+            os.path.join(script_dir, "APP SOURCE", "ClinicForms"),
         ]
         for candidate in candidates:
             if os.path.isdir(candidate):
