@@ -246,18 +246,13 @@ python SCU_CBoards.py
 ## Build macOS App (PyInstaller)
 ```bash
 cd "/path/to/SCU"
-rm -rf "MAC BUILD/build" "MAC BUILD/dist" "MAC BUILD/mac_build"
+rm -rf "MAC BUILD/build" "MAC BUILD/dist"
 eval "$(conda shell.bash hook)" && conda activate gnarnia
-pyinstaller --clean --windowed --noconsole \
+pyinstaller --clean --windowed --noconsole --noconfirm \
   --specpath "MAC BUILD/mac_build" \
   --distpath "MAC BUILD/dist" \
   --workpath "MAC BUILD/build" \
-  --name "SCU_Clipboard_Builder" \
-  --icon "SCU_logo.icns" \
-  --add-data "APP SOURCE/ClinicForms:ClinicForms" \
-  --add-data "logo.png:." \
-  --add-data "white_logo_ui.png:." \
-  SCU_CBoards.py
+  "MAC BUILD/mac_build/SCU_Clipboard_Builder.spec"
 ```
 
 Build artifacts:
