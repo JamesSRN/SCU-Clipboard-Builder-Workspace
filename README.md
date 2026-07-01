@@ -45,7 +45,8 @@ We take this seriously at a free clinic:
 
 ---
 
-## What’s in this repo 🗂️
+<details>
+<summary><strong>What’s in this repo 🗂️</strong> — for curious folks &amp; maintainers</summary>
 
 This GitHub repo is the **workspace** — source code, clinic forms, and build scripts for people who maintain the app. Front desk staff use the **release downloads** above, not this folder directly.
 
@@ -59,29 +60,33 @@ SCU/
 ```
 
 **Practical intent:**
+
 - Source code and live forms stay tied to the main project
 - Mac build outputs live under `MAC BUILD/`
 - Windows build source/output lives under `WINDOWS BUILD/`
 - Older/debug/reference material lives under `OTHER FILES/`
 
----
-
-# Developer reference 🛠️
-
-Everything below is for maintainers, builders, and curious volunteers who want the full picture.
+</details>
 
 ---
 
-## Main script
+<details>
+<summary><strong>Developer reference 🛠️</strong> — how the app works under the hood</summary>
+
+Everything in this section is for maintainers, builders, and curious volunteers who want the full picture.
+
+<details>
+<summary><strong>Main script</strong></summary>
 
 - **Entry point:** `SCU_CBoards.py`
 - **Core classes:**
   - `PDFProcessor` — form path resolution, top-sheet personalization, PDF merge
   - `ClinicApp` — Qt UI, spreadsheet paste/edit, patient parsing, preview, output actions
 
----
+</details>
 
-## Input workflow (spreadsheet-in-app)
+<details>
+<summary><strong>Input workflow</strong> — paste, parse, preview</summary>
 
 On clinic day, the Front Desk Manager copies the patient schedule from the **Visit Tracker** on **Box** and pastes it into the app.
 
@@ -101,7 +106,7 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 12. `TB`
 13. `Welcome Packet`
 
-### Parsing behavior
+**Parsing behavior:**
 
 - Paste directly from clipboard (tab/newline grid)
 - Staff can edit cells directly in the grid after paste
@@ -119,22 +124,16 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 - PDF generation rebuilds patient data from the current spreadsheet automatically, so staff do not need to click **Build Patient Preview** before generating
 - Demo rows named `Al Demo` / `al demo` are excluded from preview and generated outputs
 
----
+</details>
 
-## Top sheet personalization
+<details>
+<summary><strong>Top sheet personalization</strong></summary>
 
-Top sheet template filename:
+Top sheet template filename: `top_sheet.pdf`
 
-- `top_sheet.pdf`
+**Filled fields:** Patient Name · Date of Birth · Room Number · Language
 
-Filled fields:
-
-- `Patient Name`
-- `Date of Birth`
-- `Room Number`
-- `Language`
-
-Implementation details:
+**Implementation details:**
 
 - Field rectangles are read from top-sheet widgets
 - Values are drawn as static overlay text into those rectangles
@@ -146,14 +145,12 @@ Implementation details:
   - `vitals_sheet (fallback english)`
   - `patient_synopsis (default fallback)`
 
-Why this approach:
+**Why this approach:** avoids interactive AcroForm batch merge issues; produces stable, readable output per patient in batch mode.
 
-- Avoids interactive AcroForm batch merge issues
-- Produces stable, readable output per patient in batch mode
+</details>
 
----
-
-## Packet composition and order
+<details>
+<summary><strong>Packet composition and order</strong></summary>
 
 **Required forms** (always included):
 
@@ -191,15 +188,12 @@ Why this approach:
 
 Extra optional forms not in the explicit map are inserted **before** `vitals_sheet.pdf`.
 
----
+</details>
 
-## Language handling and fallbacks
+<details>
+<summary><strong>Language handling and fallbacks</strong></summary>
 
-**Normalized language outputs:**
-
-- `english`
-- `spanish`
-- `mandarin`
+**Normalized language outputs:** `english` · `spanish` · `mandarin`
 
 **Input normalization supports:**
 
@@ -207,9 +201,7 @@ Extra optional forms not in the explicit map are inserted **before** `vitals_she
 - mixed separators (`/`, `,`, `;`, `|`, `&`, `and`)
 - extra spaces and noisy text
 
-**Priority rule:**
-
-- If English appears anywhere in a multi-language value, language resolves to `english`
+**Priority rule:** if English appears anywhere in a multi-language value, language resolves to `english`.
 
 **Per-form path resolution order:**
 
@@ -217,18 +209,12 @@ Extra optional forms not in the explicit map are inserted **before** `vitals_she
 2. `ClinicForms/default/`
 3. `ClinicForms/english/`
 
-**Preview/source labels:**
+**Preview/source labels:** `(english)`, `(spanish)`, `(mandarin)`, `(default fallback)`, `(fallback english)`, `(missing)`
 
-- `(english)`, `(spanish)`, `(mandarin)`
-- `(default fallback)`
-- `(fallback english)`
-- `(missing)`
+</details>
 
----
-
-## Form folder layout + naming
-
-Expected structure:
+<details>
+<summary><strong>Form folder layout + naming</strong></summary>
 
 ```text
 APP SOURCE/ClinicForms/
@@ -250,9 +236,10 @@ Accepted filename variants for a base file like `phq9.pdf`:
 
 The resolver prefers language-labeled variants before plain filename.
 
----
+</details>
 
-## UI / branding
+<details>
+<summary><strong>UI / branding</strong></summary>
 
 - Window title: **SCU Clipboard Builder**
 - Dark emerald/hunter-green theme accents
@@ -261,42 +248,35 @@ The resolver prefers language-labeled variants before plain filename.
 - App icon: `SCU_logo.icns`
 - Patient name rows in preview highlighted orange
 
----
+</details>
 
-## Resource loading (dev vs bundled app)
+<details>
+<summary><strong>Resource loading</strong> — dev vs bundled app</summary>
 
-Resource discovery supports:
+Resource discovery supports running from source or from the packaged `.app` / `.exe`.
 
-- running from source
-- running from the packaged `.app` / `.exe`
+**Bundled runtime assets:** `ClinicForms/` · `logo.png` · `white_logo_ui.png`
 
-**Bundled runtime assets:**
-
-- `ClinicForms/`
-- `logo.png`
-- `white_logo_ui.png`
-
-During local development, the app auto-detects forms from:
-
-- `APP SOURCE/ClinicForms/`
-- or bundled `ClinicForms/` inside packaged builds
+During local development, the app auto-detects forms from `APP SOURCE/ClinicForms/` or bundled `ClinicForms/` inside packaged builds.
 
 Displayed log paths are sanitized to avoid personal path leakage.
 
----
+</details>
 
-## Run locally
+<details>
+<summary><strong>Run locally</strong></summary>
 
 ```bash
 cd "/path/to/SCU"
 python3 SCU_CBoards.py
 ```
 
-(Use a venv with `pyside6`, `pypdf`, `reportlab`, and `pillow` installed — see `MAC BUILD/mac_build/requirements-build.txt`.)
+Use a venv with `pyside6`, `pypdf`, `reportlab`, and `pillow` installed — see `MAC BUILD/mac_build/requirements-build.txt`.
 
----
+</details>
 
-## Build macOS app (PyInstaller)
+<details>
+<summary><strong>Build macOS app</strong> (PyInstaller)</summary>
 
 Use a **dedicated minimal Python environment** — not a bloated general-purpose conda env, or the `.app` balloon to hundreds of MB.
 
@@ -323,9 +303,10 @@ pyinstaller --clean --noconfirm \
 
 More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md)
 
----
+</details>
 
-## Build Windows app (PyInstaller)
+<details>
+<summary><strong>Build Windows app</strong> (PyInstaller)</summary>
 
 Windows packaging lives in `WINDOWS BUILD/Windows_Build_Source/`.
 
@@ -373,9 +354,10 @@ py -m PyInstaller --clean --windowed --noconfirm --name "win_SCU_CBoards" ^
 - [ ] Individual and batch PDFs generate correctly
 - [ ] Top-sheet text placement looks correct
 
----
+</details>
 
-## Distribution notes
+<details>
+<summary><strong>Distribution notes</strong></summary>
 
 Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
@@ -384,17 +366,22 @@ Front Desk Manager: open the **release page** for your computer (instructions an
 
 Staff can still override bundled forms via **Select Forms Folder** in the app.
 
----
+</details>
 
-## Troubleshooting quick notes 🔧
+<details>
+<summary><strong>Troubleshooting quick notes 🔧</strong></summary>
 
 | Issue | Fix |
 |---|---|
 | Top sheet fields scrambled | Use the latest build with header-based alignment and the no-header shift prompt fallback |
 | Missing language form | Verify the file exists in the requested language, `default`, or `english` |
 | Blurry/missing logo | Ensure `white_logo_ui.png` and `logo.png` are present and bundled |
-| Mac build huge or conflicts | Build with the minimal venv in `MAC BUILD/` — see above |
+| Mac build huge or conflicts | Build with the minimal venv in `MAC BUILD/` — see Build macOS app above |
 | Windows build conflicts | Build only from a clean copy of `WINDOWS BUILD/Windows_Build_Source/` on a real Windows PC |
+
+</details>
+
+</details>
 
 ---
 
