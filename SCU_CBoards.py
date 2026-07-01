@@ -49,6 +49,7 @@ PACKET_FORM_ORDER = [
     "phq9.pdf",
     "gad7.pdf",
     "tb_form.pdf",
+    "soma_flyer.pdf",
     "welcome_packet.pdf",
     "vitals_sheet.pdf",
     "patient_synopsis.pdf",
@@ -62,6 +63,7 @@ ANNUAL_FORMS_MAP = {
     "Specialty Clinics Consent": "specialty_clinic_consent.pdf",
     "Care Message": "caremessage_consent.pdf",
     "TB": "tb_form.pdf",
+    "SOMA": "soma_flyer.pdf",
 }
 
 EXCEPTION_FORMS_MAP = {
@@ -82,6 +84,7 @@ INPUT_GRID_HEADERS = [
     "PHQ 2-9",
     "GAD 7",
     "TB",
+    "SOMA",
     "Welcome Packet",
 ]
 
@@ -720,6 +723,7 @@ class ClinicApp(QMainWindow):
             ["phq 2-9", "phq-9", "phq"],
             ["gad 7", "gad-7", "gad"],
             ["tb"],
+            ["soma"],
             ["welcome packet education", "welcome packet"],
         ]
         for idx, aliases in enumerate(header_aliases):
@@ -954,6 +958,7 @@ class ClinicApp(QMainWindow):
                 "PHQ": ["phq 2-9", "phq-9", "phq"],
                 "GAD": ["gad 7", "gad-7", "gad"],
                 "TB": ["tb"],
+                "SOMA": ["soma"],
                 "Welcome Packet": ["welcome packet education", "welcome packet"],
             }
             form_col_idxs = {
