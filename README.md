@@ -1,16 +1,17 @@
 # SCU Clipboard Builder
 
+Offline desktop app for **The Saturday Clinic** — free care for uninsured patients in Milwaukee. Converts a pasted clinic schedule into patient-specific PDF clipboard packets.
+
 ## Overview
-`SCU_CBoards.py` is an offline desktop app that converts a pasted clinic schedule into patient-specific PDF clipboard packets.
 
 Primary goals:
 - Keep PHI local with no network/database dependency.
 - Let staff paste directly from Sheets/Excel and verify packets quickly.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
-## Pre-built Apps (for clinic staff)
+## Pre-built Apps (for Saturday Clinic volunteers)
 
-Thank you for volunteering — use the link for **your computer only** (Mac and Windows are separate).
+Thank you for volunteering at **The Saturday Clinic** — use the link for **your computer only** (Mac and Windows are separate).
 
 Each link opens a **release page** with step-by-step install instructions. Scroll to **Assets** at the bottom of that page to download the file.
 
@@ -336,7 +337,7 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Clinic staff should open the **release page** for their computer (instructions and download are on the same page):
+Saturday Clinic volunteers should open the **release page** for their computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 - **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)

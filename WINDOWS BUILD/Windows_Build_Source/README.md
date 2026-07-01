@@ -9,7 +9,7 @@ Primary goals:
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
-Clinic staff should open the **release page** for their computer (instructions and download are on the same page):
+Install instructions for **The Saturday Clinic** volunteers (free care for uninsured patients in Milwaukee). Open the **release page** for your computer — instructions and download are on the same page:
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 - **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
@@ -329,7 +329,7 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Clinic staff should open the **release page** for their computer (instructions and download are on the same page):
+Saturday Clinic volunteers should open the **release page** for their computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 - **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)

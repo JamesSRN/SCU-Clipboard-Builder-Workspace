@@ -1,12 +1,12 @@
 # MAC BUILD
 
-## Download and run (clinic staff)
+## Download and run (Saturday Clinic volunteers)
 
 **Mac only** — if you use Windows, see [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/README.md) instead.
 
 **Start here:** [macOS App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
-That page has friendly step-by-step instructions written for clinic volunteers. Scroll to **Assets** at the bottom to download `SCU_Clipboard_Builder.app.zip`.
+Install instructions for **The Saturday Clinic** (free care for uninsured patients in Milwaukee). Scroll to **Assets** at the bottom of that page to download `SCU_Clipboard_Builder.app.zip`.
 
 ### Quick reminder
 
