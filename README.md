@@ -6,20 +6,18 @@
 
 ## Hey Front Desk 👋 — start here
 
-Are you running front desk? This is the main tool you need.
+Are you setting up front desk today? You're gonna want this tool.
 
 The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
 
 New to this? Don't worry — everything you need to get started can be found right here!
 
-Pick the link for **your computer** (Mac and Windows are different downloads):
-
 | | |
 |---|---|
-| 🍎 **Mac** | [Install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
-| 💻 **Windows** | [Install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
+| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
+| 💻 **Windows** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
 
-Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the file.
+Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the zip file.
 
 More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/README.md`](WINDOWS%20BUILD/README.md) · [All releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
 
