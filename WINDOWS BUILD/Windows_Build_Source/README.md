@@ -10,7 +10,7 @@ Primary goals:
 
 ## Pre-built Apps
 - **Windows:** download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip) from GitHub Releases, extract all, then open `win_SCU_CBoards.exe`.
-- **macOS:** distributed to staff through internal OneDrive/SharePoint. Contact your team lead for the Mac app zip.
+- **macOS:** download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip) from GitHub Releases, unzip, then open `SCU_Clipboard_Builder.app`.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -327,17 +327,17 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Pre-built app zips are shared with staff through internal OneDrive/SharePoint. Contact your team lead for current download links.
+Staff download pre-built apps from **[GitHub Releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)** — use the **Jul 2026** Mac or Windows release for your computer. Do **not** use `releases/latest` (it only points to one platform).
 
 macOS staff:
-- download `SCU_Clipboard_Builder.app.zip`
+- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip)
 - unzip it
 - open `SCU_Clipboard_Builder.app`
 - if blocked, use right-click -> **Open**
 - if still blocked, use **Privacy & Security** -> **Open Anyway**
 
 Windows staff:
-- download `win_SCU_CBoards.zip`
+- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip)
 - extract all
 - open the extracted folder
 - double-click `win_SCU_CBoards.exe`

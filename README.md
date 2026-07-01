@@ -22,7 +22,7 @@ Mac and Windows are **separate downloads** on GitHub Releases — staff should u
 - Direct download: [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip)
 - More detail: `WINDOWS BUILD/README.md`
 
-Do **not** use `releases/latest` links — Mac and Windows are published as separate releases.
+Do **not** use `releases/latest` links — that URL only points to the Windows zip. Mac and Windows are published as separate releases with explicit links below.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
