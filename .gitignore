@@ -1,3 +1,6 @@
+# Python virtualenvs
+.venv-scu-mac-build/
+
 # macOS metadata
 .DS_Store
 

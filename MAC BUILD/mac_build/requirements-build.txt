@@ -1,0 +1,7 @@
+# Minimal dependencies for SCU Clipboard Builder (Mac PyInstaller build).
+# Do NOT build from general-purpose conda envs that include torch/scipy/etc.
+pyinstaller>=6.0
+PySide6>=6.5
+pypdf>=4.0
+reportlab>=4.0
+pillow>=10.0

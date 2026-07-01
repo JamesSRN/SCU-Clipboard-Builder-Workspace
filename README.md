@@ -13,8 +13,8 @@ Primary goals:
 Mac and Windows are **separate downloads** on GitHub Releases — staff should use only the link for their computer.
 
 ### macOS staff
-- Release: [macOS App (SCU_Clipboard_Builder)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-05-30)
-- Direct download: [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-05-30/SCU_Clipboard_Builder.app.zip)
+- Release: [macOS App (SCU_Clipboard_Builder)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
+- Direct download: [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip)
 - More detail: `MAC BUILD/README.md`
 
 ### Windows staff
@@ -343,7 +343,7 @@ Windows staff:
 - do not run `build_windows.bat`; that script is only for creating a new Windows build
 
 macOS staff:
-- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-05-30/SCU_Clipboard_Builder.app.zip) from GitHub Releases
+- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip) from GitHub Releases
 - unzip it
 - open `SCU_Clipboard_Builder.app`
 - if blocked, use right-click -> **Open**

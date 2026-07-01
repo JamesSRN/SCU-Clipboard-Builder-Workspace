@@ -86,7 +86,7 @@ if errorlevel 1 (
     exit /b 1
 )
 
-%PY_CMD% -m pip install pyinstaller pyside6 pypdf reportlab pandas openpyxl
+%PY_CMD% -m pip install pyinstaller pyside6 pypdf reportlab pillow
 if errorlevel 1 (
     echo.
     echo Failed while installing required Python packages.

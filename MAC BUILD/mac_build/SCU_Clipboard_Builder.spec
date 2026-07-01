@@ -4,6 +4,27 @@ import os
 # Repo root: MAC BUILD/mac_build -> MAC BUILD -> SCU
 PROJECT_ROOT = os.path.abspath(os.path.join(SPECPATH, "..", ".."))
 
+# Packages not used by SCU_CBoards.py. Keep these out even if present in the build env.
+EXCLUDES = [
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "scipy",
+    "matplotlib",
+    "numba",
+    "llvmlite",
+    "pyarrow",
+    "pandas",
+    "openpyxl",
+    "IPython",
+    "jupyter",
+    "notebook",
+    "pytest",
+    "sklearn",
+    "tensorflow",
+    "cv2",
+]
+
 a = Analysis(
     [os.path.join(PROJECT_ROOT, "SCU_CBoards.py")],
     pathex=[PROJECT_ROOT],
@@ -17,7 +38,7 @@ a = Analysis(
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=EXCLUDES,
     noarchive=False,
     optimize=0,
 )

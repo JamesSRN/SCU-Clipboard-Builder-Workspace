@@ -5,7 +5,6 @@ import sys
 import tempfile
 from datetime import datetime
 
-import pandas as pd
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtGui import QBrush, QColor
