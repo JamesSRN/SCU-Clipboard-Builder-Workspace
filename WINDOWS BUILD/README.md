@@ -1,4 +1,4 @@
-# WINDOWS BUILD 💻
+# WINDOWS BUILD
 
 Looking to get started? Check out the **Windows release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02).
 
@@ -8,7 +8,7 @@ Looking to get started? Check out the **Windows release page** [here](https://gi
 
 Are you setting up front desk today on **Windows**? You're gonna want this tool.
 
-The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
+The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done.
 
 New to this? Don't worry — everything you need is on the release page:
 
@@ -16,9 +16,9 @@ New to this? Don't worry — everything you need is on the release page:
 
 Scroll to **Assets** at the bottom of that page to download the zip file.
 
-**When you paste:** include the **times** and **column headers** from the Visit Tracker — the app uses those headers to make sure the right forms go on each clipboard. 📌
+**When you paste:** include the **times** and **column headers** from the Visit Tracker — the app uses those headers to make sure the right forms go on each clipboard.
 
-**Clinic day:** copy → paste → **Generate** (save to **OneDrive**) → print → **delete the file** once you're done! That's it, no more hunting for forms! 🖨️
+**Clinic day:** copy → paste → **Generate** (save to **OneDrive**) → print → **delete the file** once you're done! That's it, no more hunting for forms!
 
 On a **Mac** instead? See [`MAC BUILD/README.md`](../MAC%20BUILD/README.md).
 
@@ -39,7 +39,7 @@ Full step-by-step instructions and troubleshooting are on the [release page](htt
 </details>
 
 <details>
-<summary><strong>Build from source 🛠️</strong> — for maintainers only</summary>
+<summary><strong>Build from source</strong> — for maintainers only</summary>
 
 Front desk staff do **not** need this section — use the release download above. Do **not** run `build_windows.bat` unless you are rebuilding the app.
 
@@ -56,4 +56,4 @@ More detail: [`Windows_Build_Source/BUILD_ON_PC.md`](Windows_Build_Source/BUILD_
 
 ---
 
-*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this. 💚*
+*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this.*
