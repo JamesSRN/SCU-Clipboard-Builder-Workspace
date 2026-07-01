@@ -21,7 +21,7 @@ New to this? Don't worry — everything you need to get started can be found rig
 
 Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the zip file.
 
-Code detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/README.md`](WINDOWS%20BUILD/README.md) · [All releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
+Code Details: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/README.md`](WINDOWS%20BUILD/README.md) · [All releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
 
 ---
 
