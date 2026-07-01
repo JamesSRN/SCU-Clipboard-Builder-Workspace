@@ -42,10 +42,13 @@
 | SmartScreen warning | **More info** -> **Run anyway** |
 | Old version / missing forms | Download the zip again from the link above |
 
-## Build from source (developers)
+## Build from source (on your Windows PC)
 
-Source and build script live in:
+Source and build script are **already on GitHub** — no Mac needed.
 
-- `WINDOWS BUILD/Windows_Build_Source/`
+1. On your PC, download the repo: [SCU-Clipboard-Builder-Workspace](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace) → **Code** → **Download ZIP** (or `git clone` the repo).
+2. Open folder: `WINDOWS BUILD\Windows_Build_Source\`
+3. Double-click **`build_windows.bat`**
+4. When finished, use **`win_SCU_CBoards.zip`** in that folder (extract → run `win_SCU_CBoards.exe`).
 
-Copy that folder to a Windows PC, then double-click `build_windows.bat`.
+Step-by-step guide: [`Windows_Build_Source/BUILD_ON_PC.md`](Windows_Build_Source/BUILD_ON_PC.md)
