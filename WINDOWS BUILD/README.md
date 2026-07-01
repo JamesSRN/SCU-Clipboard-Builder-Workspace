@@ -16,7 +16,7 @@ Install guide for **The Saturday Clinic Front Desk Manager** — paste the sched
 4. Double-click **`win_SCU_CBoards.exe`** inside the extracted folder.
 5. If Windows shows **“Windows protected your PC”** — click **More info** → **Run anyway**. This is normal; you’re not doing anything wrong.
 
-Full step-by-step instructions (with troubleshooting) are on the release page.
+Full step-by-step instructions are on the release page. Troubleshooting is there too, tucked below the main steps.
 
 **Note:** Updates to this GitHub repo do not automatically update the app on your computer. When there is a new release, download again from the release page.
 
