@@ -5,7 +5,7 @@
 
 Primary goals:
 - Keep PHI local with no network/database dependency.
-- Let staff paste directly from Sheets/Excel and verify packets quickly.
+- Let staff copy the schedule from the **Visit Tracker** on **Box**, paste into the app, and verify packets quickly.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
@@ -59,6 +59,8 @@ Practical intent:
 ---
 
 ## Input Workflow (Spreadsheet-in-App)
+On clinic day, the Front Desk Manager copies the patient schedule from the **Visit Tracker** on **Box** and pastes it into the app.
+
 The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 
 1. `Time`

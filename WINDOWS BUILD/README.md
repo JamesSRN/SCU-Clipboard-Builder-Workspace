@@ -6,7 +6,7 @@
 
 **Start here:** [Windows App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 
-Install guide for **The Saturday Clinic Front Desk Manager** — paste the schedule, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `win_SCU_CBoards.zip`.
+Install guide for **The Saturday Clinic Front Desk Manager** — copy the schedule from the **Visit Tracker** on **Box**, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `win_SCU_CBoards.zip`.
 
 ### Quick reminder
 

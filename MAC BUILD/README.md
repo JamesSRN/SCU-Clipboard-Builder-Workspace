@@ -6,7 +6,7 @@
 
 **Start here:** [macOS App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
-Install guide for **The Saturday Clinic Front Desk Manager** — paste the schedule, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `SCU_Clipboard_Builder.app.zip`.
+Install guide for **The Saturday Clinic Front Desk Manager** — copy the schedule from the **Visit Tracker** on **Box**, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `SCU_Clipboard_Builder.app.zip`.
 
 ### Quick reminder
 
