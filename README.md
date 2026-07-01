@@ -6,9 +6,11 @@
 
 ## Hey Front Desk 👋 — start here
 
-If you run the front desk, you probably don’t need the rest of this page. You need the app.
+Are you running front desk? This is the main tool you need.
 
-**SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets — automatically and stress-free. Copy from the **Visit Tracker** on **Box**, paste, click **Generate**, done. ✨
+The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
+
+New to this? Don't worry — everything you need to get started can be found right here!
 
 Pick the link for **your computer** (Mac and Windows are different downloads):
 
