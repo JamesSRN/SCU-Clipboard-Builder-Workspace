@@ -14,8 +14,9 @@ That page has friendly step-by-step instructions written for clinic volunteers. 
 2. Download **`win_SCU_CBoards.zip`** from **Assets**.
 3. **Extract All** in File Explorer — do not open the zip directly.
 4. Double-click **`win_SCU_CBoards.exe`** inside the extracted folder.
+5. If Windows shows **“Windows protected your PC”** — click **More info** → **Run anyway**. This is normal; you’re not doing anything wrong.
 
-If something goes wrong, the troubleshooting table on the release page is the best place to start.
+Full step-by-step instructions (with troubleshooting) are on the release page.
 
 **Note:** Updates to this GitHub repo do not automatically update the app on your computer. When there is a new release, download again from the release page.
 
