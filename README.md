@@ -18,8 +18,8 @@ Mac and Windows are **separate downloads** on GitHub Releases — staff should u
 - More detail: `MAC BUILD/README.md`
 
 ### Windows staff
-- Release: [Windows App (win_SCU_CBoards)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/windows-app-2026-05-30)
-- Direct download: [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-05-30/win_SCU_CBoards.zip)
+- Release: [Windows App (win_SCU_CBoards)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/windows-app-2026-07-01)
+- Direct download: [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip)
 - More detail: `WINDOWS BUILD/README.md`
 
 Do **not** use `releases/latest` links — Mac and Windows are published as separate releases.
@@ -335,7 +335,7 @@ Windows testing checklist:
 
 ## Distribution Notes
 Windows staff:
-- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-05-30/win_SCU_CBoards.zip) from GitHub Releases
+- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip) from GitHub Releases
 - in File Explorer, right-click the zip -> **Extract All...** -> **Extract**
 - open the extracted `win_SCU_CBoards` folder (not the zip file itself)
 - double-click `win_SCU_CBoards.exe`
