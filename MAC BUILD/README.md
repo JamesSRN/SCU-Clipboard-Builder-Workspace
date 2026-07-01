@@ -1,6 +1,8 @@
 # MAC BUILD
 
-## Download and run (Front Desk Manager)
+Looking to get started? Check out the **Mac release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01).
+
+---
 
 **Mac only** — if you use Windows, see [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/README.md) instead.
 

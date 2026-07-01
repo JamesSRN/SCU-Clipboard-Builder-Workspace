@@ -1,6 +1,8 @@
 # WINDOWS BUILD
 
-## Download and run (Front Desk Manager)
+Looking to get started? Check out the **Windows release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02).
+
+---
 
 **Windows only** — if you use a Mac, see [`MAC BUILD/README.md`](../MAC%20BUILD/README.md) instead.
 
