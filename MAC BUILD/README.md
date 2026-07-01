@@ -18,7 +18,7 @@ Scroll to **Assets** at the bottom of that page to download the zip file.
 
 **When you paste:** include the **times** and **column headers** from the Visit Tracker — the app uses those headers to make sure the right forms go on each clipboard. 📌
 
-**Clinic day:** copy → paste → **Generate** → print the batch PDF. That's it! 🖨️
+**Clinic day:** copy → paste → **Generate** → print the batch PDF. That's it, no more hunting for forms! 🖨️
 
 On **Windows** instead? See [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/README.md).
 
