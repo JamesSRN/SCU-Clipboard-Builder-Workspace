@@ -30,7 +30,7 @@ On a **Mac** instead? See [`MAC BUILD/README.md`](../MAC%20BUILD/README.md).
 1. Download **`win_SCU_CBoards.zip`** from **Assets** on the release page
 2. **Extract All** in File Explorer — do not open the zip directly
 3. Double-click **`win_SCU_CBoards.exe`** inside the extracted folder
-4. If Windows shows **“Windows protected your PC”**: **More info** → **Run anyway** (normal the first time)
+4. **Expect a security pop-up — that's totally normal.** If Windows shows **"Windows protected your PC"**, click **More info** → **Run anyway**. You're not doing anything wrong.
 
 Full step-by-step instructions and troubleshooting are on the [release page](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02).
 

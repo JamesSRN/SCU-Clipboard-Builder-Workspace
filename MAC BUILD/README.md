@@ -30,7 +30,7 @@ On **Windows** instead? See [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/READM
 1. Download **`SCU_Clipboard_Builder.app.zip`** from **Assets** on the release page
 2. Unzip it
 3. Open **`SCU_Clipboard_Builder.app`**
-4. If macOS blocks the app: **right-click** → **Open** → **Open** again (or **Open Anyway** in Privacy & Security)
+4. **Expect a security prompt — that's totally normal.** If macOS blocks the app, **right-click** → **Open** → **Open** again (or **Open Anyway** in Privacy & Security). You're not doing anything wrong.
 
 Full step-by-step instructions and troubleshooting are on the [release page](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01).
 
