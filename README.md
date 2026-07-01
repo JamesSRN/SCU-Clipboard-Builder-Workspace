@@ -10,6 +10,8 @@ Are you setting up front desk today? You're gonna want this tool.
 
 The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
 
+**Tip:** include the **times** and **column headers** when you copy — the app uses those headers to make sure the right forms go on each clipboard. 📌
+
 New to this? Don't worry — everything you need to get started can be found right here!
 
 | | |
@@ -25,7 +27,7 @@ More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/R
 
 ## What this app does (30-second version)
 
-- 📋 **Paste the schedule** from the Visit Tracker on Box into a spreadsheet-style grid
+- 📋 **Paste the schedule** from the Visit Tracker on Box — include **times** and **column headers** (the app uses headers to match the right forms to each patient)
 - 👀 **Preview each patient** — see which forms will land on their clipboard
 - 📁 **Generate PDFs in one batch** — consistent order, correct language, every time
 - 🔒 **Works offline** — no cloud upload, no database; patient info stays on your machine until you save PDFs

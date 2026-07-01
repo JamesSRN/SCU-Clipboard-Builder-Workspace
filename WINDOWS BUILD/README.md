@@ -16,6 +16,8 @@ New to this? Don't worry — everything you need is on the release page:
 
 Scroll to **Assets** at the bottom of that page to download the zip file.
 
+**When you paste:** include the **times** and **column headers** from the Visit Tracker — the app uses those headers to make sure the right forms go on each clipboard. 📌
+
 On a **Mac** instead? See [`MAC BUILD/README.md`](../MAC%20BUILD/README.md).
 
 ---
