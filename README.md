@@ -29,8 +29,8 @@ More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/R
 
 - 📋 **Paste the schedule** from the Visit Tracker on Box — include **times** and **column headers** (the app uses headers to match the right forms to each patient)
 - 👀 **Preview each patient** — see which forms will land on their clipboard
-- 📁 **Generate PDFs in one batch** — consistent order, correct language, every time
-- 🖨️ **Print the batch PDF** — that's it, no more hunting for forms!
+- 📁 **Generate PDFs in one batch** — save to **OneDrive** to keep the file secure
+- 🖨️ **Print the batch PDF**, then delete once you're done — that's it, no more hunting for forms!
 - 🔒 **Works offline** — no cloud upload, no database; patient info stays on your machine until you save PDFs
 
 That’s the whole vibe: less manual form hunting, more time for patients.
