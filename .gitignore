@@ -4,6 +4,7 @@
 # Temp build/patch working dirs
 .tmp_form_updates/
 .tmp_win_patch/
+.tmp_welcome_rebuild/
 
 # macOS metadata
 .DS_Store
