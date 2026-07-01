@@ -1,12 +1,12 @@
 # WINDOWS BUILD
 
-## Download and run (Saturday Clinic volunteers)
+## Download and run (Front Desk Manager)
 
 **Windows only** — if you use a Mac, see [`MAC BUILD/README.md`](../MAC%20BUILD/README.md) instead.
 
 **Start here:** [Windows App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 
-Install instructions for **The Saturday Clinic** (free care for uninsured patients in Milwaukee). Scroll to **Assets** at the bottom of that page to download `win_SCU_CBoards.zip`.
+Install guide for **The Saturday Clinic Front Desk Manager** — paste the schedule, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `win_SCU_CBoards.zip`.
 
 ### Quick reminder
 

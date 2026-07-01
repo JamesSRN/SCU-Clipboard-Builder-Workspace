@@ -1,17 +1,17 @@
 # SCU Clipboard Builder
 
-Offline desktop app for **The Saturday Clinic** — free care for uninsured patients in Milwaukee. Converts a pasted clinic schedule into patient-specific PDF clipboard packets.
+Offline desktop app for **The Saturday Clinic** — free care for uninsured patients in Milwaukee. Built for the **Front Desk Manager** to turn a pasted schedule into patient clipboard packets automatically and stress-free.
 
 ## Overview
 
 Primary goals:
 - Keep PHI local with no network/database dependency.
-- Let staff paste directly from Sheets/Excel and verify packets quickly.
-- Generate consistent, correctly ordered packets in both single and batch workflows.
+- Let the front desk paste directly from Sheets/Excel and verify packets quickly.
+- Generate consistent, correctly ordered packets in one batch — less stress on clinic morning.
 
-## Pre-built Apps (for Saturday Clinic volunteers)
+## Pre-built Apps (Front Desk Manager)
 
-Thank you for volunteering at **The Saturday Clinic** — use the link for **your computer only** (Mac and Windows are separate).
+If you run the front desk at **The Saturday Clinic**, use the link for **your computer only** (Mac and Windows are separate).
 
 Each link opens a **release page** with step-by-step install instructions. Scroll to **Assets** at the bottom of that page to download the file.
 
@@ -337,7 +337,7 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Saturday Clinic volunteers should open the **release page** for their computer (instructions and download are on the same page):
+Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 - **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
