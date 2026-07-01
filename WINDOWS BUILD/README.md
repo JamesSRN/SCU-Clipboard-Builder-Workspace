@@ -2,7 +2,10 @@
 
 ## Download and run (staff)
 
-**Download:** [win_SCU_CBoards.zip](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/clipboard-builder-2026-07-01/win_SCU_CBoards.zip)
+**Windows only** — Mac staff should use `MAC BUILD/README.md` instead.
+
+- Release page: [Windows App (win_SCU_CBoards)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/windows-app-2026-05-30)
+- Direct download: [win_SCU_CBoards.zip](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-05-30/win_SCU_CBoards.zip)
 
 ### Step-by-step (Windows 10/11)
 

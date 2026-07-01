@@ -1,9 +1,11 @@
 # MAC BUILD
 
 ## Download and run (staff)
-Pre-built macOS app zip:
 
-- [Download SCU_Clipboard_Builder.app.zip (GitHub Releases)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/SCU_Clipboard_Builder.app.zip)
+**Mac only** — Windows staff should use `WINDOWS BUILD/README.md` instead.
+
+- Release page: [macOS App (SCU_Clipboard_Builder)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-05-30)
+- Direct download: [SCU_Clipboard_Builder.app.zip](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-05-30/SCU_Clipboard_Builder.app.zip)
 
 Steps:
 1. Download the zip from the link above.
@@ -14,6 +16,7 @@ Steps:
 Local copy (for maintainers): `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`
 
 ## Build from source (developers)
+
 PyInstaller spec file:
 
 - `MAC BUILD/mac_build/SCU_Clipboard_Builder.spec`
