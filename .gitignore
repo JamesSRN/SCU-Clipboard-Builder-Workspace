@@ -1,6 +1,10 @@
 # Python virtualenvs
 .venv-scu-mac-build/
 
+# Temp build/patch working dirs
+.tmp_form_updates/
+.tmp_win_patch/
+
 # macOS metadata
 .DS_Store
 

@@ -306,12 +306,16 @@ class ClinicApp(QMainWindow):
     def _default_forms_dir():
         resource_base = ClinicApp._resource_base_dir()
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        candidates = [
+        candidates = []
+        if getattr(sys, "frozen", False):
+            exe_dir = os.path.dirname(sys.executable)
+            candidates.append(os.path.join(exe_dir, "_internal", "ClinicForms"))
+        candidates.extend([
             os.path.join(resource_base, "ClinicForms"),
             os.path.join(resource_base, "APP SOURCE", "ClinicForms"),
             os.path.join(script_dir, "ClinicForms"),
             os.path.join(script_dir, "APP SOURCE", "ClinicForms"),
-        ]
+        ])
         for candidate in candidates:
             if os.path.isdir(candidate):
                 return candidate
@@ -445,6 +449,14 @@ class ClinicApp(QMainWindow):
         self.setCentralWidget(main_widget)
         if self.forms_dir:
             self.log(f"Forms folder auto-selected: {self._display_forms_path(self.forms_dir)}")
+            welcome_check = os.path.join(self.forms_dir, "english", "welcome_packet.pdf")
+            if not os.path.isfile(welcome_check):
+                self.log(
+                    "WARNING: english/welcome_packet.pdf was not found in the selected forms folder. "
+                    "Use the Jul 2026 Windows release, or click Select Forms Folder and choose "
+                    "the _internal\\ClinicForms folder inside the extracted app.",
+                    "WARNING",
+                )
 
     def _load_logo_image(self):
         resource_base = self._resource_base_dir()

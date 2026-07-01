@@ -21,6 +21,18 @@
 - Do **not** try to open the `.zip` directly — always **Extract All** first.
 - Do **not** run `build_windows.bat` — that is only for developers rebuilding the app.
 
+### If welcome packet still shows "missing"
+
+1. Confirm you downloaded **[windows-app-2026-07-01](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/windows-app-2026-07-01)** — not the Mac `.app.zip`, not the May 2026 release, and not the repo "Code" source zip.
+2. Delete any old `win_SCU_CBoards` folder, then extract the new zip fresh.
+3. In File Explorer, verify this file exists (about 9 MB):
+   `win_SCU_CBoards\_internal\ClinicForms\english\welcome_packet.pdf`
+4. Open the app and check the log at the bottom. It should say `Forms folder auto-selected: ClinicForms`.
+5. If welcome packet is still missing, click **Select Forms Folder** and choose:
+   `win_SCU_CBoards\_internal\ClinicForms` (inside your extracted folder).
+
+**Git / GitHub code updates do not change the app on your PC.** Staff must download the release zip above — pushing git from a developer machine does not update installed apps.
+
 ### Common mistakes
 
 | Problem | Fix |
