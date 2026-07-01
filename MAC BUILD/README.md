@@ -1,4 +1,4 @@
-# MAC BUILD
+# MAC BUILD 🍎
 
 Looking to get started? Check out the **Mac release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01).
 
@@ -18,7 +18,7 @@ Scroll to **Assets** at the bottom of that page to download the zip file.
 
 **When you paste:** include the **times** and **column headers** from the Visit Tracker — the app uses those headers to make sure the right forms go on each clipboard.
 
-**Clinic day:** copy → paste → **Generate** (save to **OneDrive**) → print → **delete the file** once you're done! That's it, no more hunting for forms!
+**Clinic day:** copy → paste → **Generate** (save to **OneDrive**) → print → **delete the file** once you're done! That's it, no more hunting for forms! 🖨️
 
 On **Windows** instead? See [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/README.md).
 
@@ -76,4 +76,4 @@ pyinstaller --clean --noconfirm \
 
 ---
 
-*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this.*
+*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this. 💚*

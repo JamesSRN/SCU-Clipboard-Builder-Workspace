@@ -4,11 +4,11 @@
 
 ---
 
-## Hey Front Desk — start here
+## Hey Front Desk 👋 — start here
 
 Are you setting up front desk today? You're gonna want this tool.
 
-The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done.
+The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
 
 **Tip:** include the **times** and **column headers** when you copy — the app uses those headers to make sure the right forms go on each clipboard.
 
@@ -16,8 +16,8 @@ New to this? Don't worry — everything you need to get started can be found rig
 
 | | |
 |---|---|
-| **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
-| **Windows** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
+| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
+| 💻 **Windows** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
 
 Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the zip file.
 
@@ -30,7 +30,7 @@ Code Details: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/
 - **Paste the schedule** from the Visit Tracker on Box — include **times** and **column headers** (the app uses headers to match the right forms to each patient)
 - **Preview each patient** — see which forms will land on their clipboard
 - **Generate PDFs in one batch** — save to **OneDrive** to keep the file secure
-- **Print the batch PDF**, then **delete the file** once you're done — that's it, no more hunting for forms!
+- **Print the batch PDF**, then **delete the file** once you're done — that's it, no more hunting for forms! 🖨️
 - **Works offline** — no cloud upload, no database; patient info stays on your machine until you save PDFs
 
 That’s the whole vibe: less manual form hunting, more time for patients.
@@ -390,4 +390,4 @@ Staff can still override bundled forms via **Select Forms Folder** in the app.
 
 ---
 
-*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this.*
+*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this. 💚*
