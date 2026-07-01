@@ -1,77 +1,88 @@
-# SCU Clipboard Builder
+# SCU Clipboard Builder 📋
 
-Offline desktop app for **The Saturday Clinic** — free care for uninsured patients in Milwaukee. Built for the **Front Desk Manager** to turn a pasted schedule into patient clipboard packets automatically and stress-free.
+**The Saturday Clinic** · free care for uninsured patients in Milwaukee · built to make clinic morning easier
 
-## Overview
+---
 
-Primary goals:
-- Keep PHI local with no network/database dependency.
-- Let the front desk copy the schedule from the **Visit Tracker** on **Box**, paste into the app, and verify packets quickly.
-- Generate consistent, correctly ordered packets in one batch — less stress on clinic morning.
+## Hey Front Desk 👋 — start here
 
-## Pre-built Apps (Front Desk Manager)
+If you run the front desk, you probably don’t need the rest of this page. You need the app.
 
-If you run the front desk at **The Saturday Clinic**, use the link for **your computer only** (Mac and Windows are separate).
+**SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets — automatically and stress-free. Copy from the **Visit Tracker** on **Box**, paste, click **Generate**, done. ✨
 
-Each link opens a **release page** with step-by-step install instructions. Scroll to **Assets** at the bottom of that page to download the file.
+Pick the link for **your computer** (Mac and Windows are different downloads):
 
-### Mac (macOS)
-**Start here:** [macOS App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
+| | |
+|---|---|
+| 🍎 **Mac** | [Install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
+| 💻 **Windows** | [Install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
 
-More detail in `MAC BUILD/README.md`.
+Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the file.
 
-### Windows
-**Start here:** [Windows App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
+More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md) · [`WINDOWS BUILD/README.md`](WINDOWS%20BUILD/README.md) · [All releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
 
-More detail in `WINDOWS BUILD/README.md`.
+---
 
-All releases: [GitHub Releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
+## What this app does (30-second version)
 
-## Current Folder Layout
-The workspace is organized into four long-term buckets:
+- 📋 **Paste the schedule** from the Visit Tracker on Box into a spreadsheet-style grid
+- 👀 **Preview each patient** — see which forms will land on their clipboard
+- 📁 **Generate PDFs in one batch** — consistent order, correct language, every time
+- 🔒 **Works offline** — no cloud upload, no database; patient info stays on your machine until you save PDFs
+
+That’s the whole vibe: less manual form hunting, more time for patients.
+
+---
+
+## Privacy 🔒
+
+We take this seriously at a free clinic:
+
+- No network APIs — the app doesn’t phone home
+- Patient data lives in memory for the current session only
+- **Clear Session (Privacy)** wipes parsed data and preview state when you’re done
+- PDF output only goes where *you* choose to save it
+
+---
+
+## What’s in this repo 🗂️
+
+This GitHub repo is the **workspace** — source code, clinic forms, and build scripts for people who maintain the app. Front desk staff use the **release downloads** above, not this folder directly.
 
 ```text
 SCU/
-├── APP SOURCE/
-│   ├── ClinicForms/
-│   └── icon.iconset/
-├── MAC BUILD/
-│   ├── build/
-│   ├── dist/
-│   ├── mac_build/
-│   └── repo_export_mac/
-├── WINDOWS BUILD/
-│   ├── Windows_Build_Source/
-│   └── repo_export_windows/
-├── OTHER FILES/
-└── top-level source/docs/assets still in active use
+├── APP SOURCE/          ← live app code + ClinicForms PDFs
+├── MAC BUILD/           ← Mac packaging (PyInstaller)
+├── WINDOWS BUILD/       ← Windows packaging + build_windows.bat
+├── OTHER FILES/         ← older reference / debug material
+└── SCU_CBoards.py       ← main app entry point
 ```
 
-Practical intent:
-- source code and live forms stay tied to the main project
-- Mac packaging outputs live under `MAC BUILD/`
-- Windows packaging source/output lives under `WINDOWS BUILD/`
-- older/debug/reference material lives under `OTHER FILES/`
+**Practical intent:**
+- Source code and live forms stay tied to the main project
+- Mac build outputs live under `MAC BUILD/`
+- Windows build source/output lives under `WINDOWS BUILD/`
+- Older/debug/reference material lives under `OTHER FILES/`
 
 ---
 
-## Privacy + Offline Behavior
-- No network APIs are used.
-- Patient data lives in memory during the current session only.
-- **Clear Session (Privacy)** wipes parsed patient data and preview state.
-- Output PHI is only written to user-selected PDF output files.
+# Developer reference 🛠️
+
+Everything below is for maintainers, builders, and curious volunteers who want the full picture.
 
 ---
 
-## Main Script
-- Entry point: `SCU_CBoards.py`
-- Core classes:
-  - `PDFProcessor`: form path resolution, top-sheet personalization, PDF merge.
-  - `ClinicApp`: Qt UI, spreadsheet paste/edit, patient parsing, preview, output actions.
+## Main script
+
+- **Entry point:** `SCU_CBoards.py`
+- **Core classes:**
+  - `PDFProcessor` — form path resolution, top-sheet personalization, PDF merge
+  - `ClinicApp` — Qt UI, spreadsheet paste/edit, patient parsing, preview, output actions
 
 ---
 
-## Input Workflow (Spreadsheet-in-App)
+## Input workflow (spreadsheet-in-app)
+
 On clinic day, the Front Desk Manager copies the patient schedule from the **Visit Tracker** on **Box** and pastes it into the app.
 
 The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
@@ -91,39 +102,44 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 13. `Welcome Packet`
 
 ### Parsing behavior
-- Paste directly from clipboard (tab/newline grid).
-- Staff can edit cells directly in the grid after paste.
-- The patient preview auto-refreshes when spreadsheet cells are edited.
-- Leading blank pasted rows are automatically removed before import.
-- If pasted row 1 looks like headers, the app uses those headers immediately to align incoming values into the app’s fixed columns.
-- The pasted header row is treated as mapping metadata and is not left behind as a patient row in the spreadsheet body.
-- If no header row is pasted, the app falls back to built-in default headers and shows a warning asking staff to include headers.
+
+- Paste directly from clipboard (tab/newline grid)
+- Staff can edit cells directly in the grid after paste
+- The patient preview auto-refreshes when spreadsheet cells are edited
+- Leading blank pasted rows are automatically removed before import
+- If pasted row 1 looks like headers, the app uses those headers immediately to align incoming values into the app’s fixed columns
+- The pasted header row is treated as mapping metadata and is not left behind as a patient row in the spreadsheet body
+- If no header row is pasted, the app falls back to built-in default headers and shows a warning asking staff to include headers
 - After a header-row paste, the app shows:
   - a `Column Check` popup saying whether recognized columns already match or were re-aligned
   - a second `Ignored Columns` popup if unsupported columns such as `SOMA` were skipped
-- Any non-blank marker in optional form columns counts as selected (`x`, `need`, `fill`, etc.).
-- If a true no-header paste looks shifted left by one column, the app still offers the older right-shift correction flow.
-- When a visible shift is applied, the info log records only the first populated row’s moved values and target headers.
-- PDF generation rebuilds patient data from the current spreadsheet automatically, so staff do not need to click **Build Patient Preview** before generating.
-- Demo rows named `Al Demo` / `al demo` are excluded from preview and generated outputs.
+- Any non-blank marker in optional form columns counts as selected (`x`, `need`, `fill`, etc.)
+- If a true no-header paste looks shifted left by one column, the app still offers the older right-shift correction flow
+- When a visible shift is applied, the info log records only the first populated row’s moved values and target headers
+- PDF generation rebuilds patient data from the current spreadsheet automatically, so staff do not need to click **Build Patient Preview** before generating
+- Demo rows named `Al Demo` / `al demo` are excluded from preview and generated outputs
 
 ---
 
-## Top Sheet Personalization
+## Top sheet personalization
+
 Top sheet template filename:
+
 - `top_sheet.pdf`
 
 Filled fields:
+
 - `Patient Name`
 - `Date of Birth`
 - `Room Number`
 - `Language`
 
 Implementation details:
-- Field rectangles are read from top-sheet widgets.
-- Values are drawn as static overlay text into those rectangles.
-- Text is auto-sized to fit each field box.
-- A compact **Included Forms** list is rendered under DOB.
+
+- Field rectangles are read from top-sheet widgets
+- Values are drawn as static overlay text into those rectangles
+- Text is auto-sized to fit each field box
+- A compact **Included Forms** list is rendered under DOB
 - Each listed form includes its resolved language/source label, such as:
   - `medical_consent (spanish)`
   - `initial_visit_intake (mandarin)`
@@ -131,19 +147,23 @@ Implementation details:
   - `patient_synopsis (default fallback)`
 
 Why this approach:
-- Avoids interactive AcroForm batch merge issues.
-- Produces stable, readable output per patient in batch mode.
+
+- Avoids interactive AcroForm batch merge issues
+- Produces stable, readable output per patient in batch mode
 
 ---
 
-## Packet Composition and Order
-Required forms (always included):
+## Packet composition and order
+
+**Required forms** (always included):
+
 - `medical_consent.pdf`
 - `vitals_sheet.pdf`
 - `patient_synopsis.pdf`
 - `post_visit_instructions.pdf`
 
-Optional forms (from schedule marks):
+**Optional forms** (from schedule marks):
+
 - `initial_visit_intake.pdf`
 - `annual_demographics.pdf`
 - `caremessage_consent.pdf`
@@ -153,7 +173,8 @@ Optional forms (from schedule marks):
 - `tb_form.pdf`
 - `welcome_packet.pdf`
 
-Canonical order:
+**Canonical order:**
+
 1. `top_sheet.pdf`
 2. `medical_consent.pdf`
 3. `initial_visit_intake.pdf` (if selected)
@@ -172,26 +193,32 @@ Extra optional forms not in the explicit map are inserted **before** `vitals_she
 
 ---
 
-## Language Handling and Fallbacks
-Normalized language outputs:
+## Language handling and fallbacks
+
+**Normalized language outputs:**
+
 - `english`
 - `spanish`
 - `mandarin`
 
-Input normalization supports:
+**Input normalization supports:**
+
 - multi-language cells (`Spanish, English`, `English / Arabic`, etc.)
 - mixed separators (`/`, `,`, `;`, `|`, `&`, `and`)
 - extra spaces and noisy text
 
-Priority rule:
-- If English appears anywhere in a multi-language value, language resolves to `english`.
+**Priority rule:**
 
-Per-form path resolution order:
+- If English appears anywhere in a multi-language value, language resolves to `english`
+
+**Per-form path resolution order:**
+
 1. requested language folder (for example `ClinicForms/spanish/`)
 2. `ClinicForms/default/`
 3. `ClinicForms/english/`
 
-Preview/source labels:
+**Preview/source labels:**
+
 - `(english)`, `(spanish)`, `(mandarin)`
 - `(default fallback)`
 - `(fallback english)`
@@ -199,7 +226,8 @@ Preview/source labels:
 
 ---
 
-## Form Folder Layout + Naming
+## Form folder layout + naming
+
 Expected structure:
 
 ```text
@@ -211,6 +239,7 @@ APP SOURCE/ClinicForms/
 ```
 
 Accepted filename variants for a base file like `phq9.pdf`:
+
 - `phq9 (spanish).pdf`
 - `phq9 (mandarin).pdf`
 - `phq9_spanish.pdf`
@@ -223,7 +252,8 @@ The resolver prefers language-labeled variants before plain filename.
 
 ---
 
-## UI / Branding
+## UI / branding
+
 - Window title: **SCU Clipboard Builder**
 - Dark emerald/hunter-green theme accents
 - Orange title text
@@ -233,17 +263,21 @@ The resolver prefers language-labeled variants before plain filename.
 
 ---
 
-## Resource Loading (Dev vs Bundled App)
-Resource discovery supports:
-- running from source
-- running from the packaged `.app`
+## Resource loading (dev vs bundled app)
 
-Bundled runtime assets:
+Resource discovery supports:
+
+- running from source
+- running from the packaged `.app` / `.exe`
+
+**Bundled runtime assets:**
+
 - `ClinicForms/`
 - `logo.png`
 - `white_logo_ui.png`
 
 During local development, the app auto-detects forms from:
+
 - `APP SOURCE/ClinicForms/`
 - or bundled `ClinicForms/` inside packaged builds
 
@@ -251,61 +285,62 @@ Displayed log paths are sanitized to avoid personal path leakage.
 
 ---
 
-## Run Locally
+## Run locally
+
 ```bash
 cd "/path/to/SCU"
-eval "$(conda shell.bash hook)" && conda activate gnarnia
-python SCU_CBoards.py
+python3 SCU_CBoards.py
 ```
+
+(Use a venv with `pyside6`, `pypdf`, `reportlab`, and `pillow` installed — see `MAC BUILD/mac_build/requirements-build.txt`.)
 
 ---
 
-## Build macOS App (PyInstaller)
+## Build macOS app (PyInstaller)
+
+Use a **dedicated minimal Python environment** — not a bloated general-purpose conda env, or the `.app` balloon to hundreds of MB.
+
 ```bash
 cd "/path/to/SCU"
-rm -rf "MAC BUILD/build" "MAC BUILD/dist"
-eval "$(conda shell.bash hook)" && conda activate gnarnia
-pyinstaller --clean --windowed --noconsole --noconfirm \
-  --specpath "MAC BUILD/mac_build" \
+
+# One-time: create a clean build venv
+python3 -m venv ".venv-scu-mac-build"
+source ".venv-scu-mac-build/bin/activate"
+pip install -r "MAC BUILD/mac_build/requirements-build.txt"
+
+# Build
+pyinstaller --clean --noconfirm \
   --distpath "MAC BUILD/dist" \
   --workpath "MAC BUILD/build" \
   "MAC BUILD/mac_build/SCU_Clipboard_Builder.spec"
 ```
 
-Build artifacts:
+**Build artifacts:**
+
 - `MAC BUILD/dist/SCU_Clipboard_Builder.app`
 - `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`
 - `MAC BUILD/mac_build/SCU_Clipboard_Builder.spec`
 
+More detail: [`MAC BUILD/README.md`](MAC%20BUILD/README.md)
+
 ---
 
-## Build Windows App (PyInstaller)
-Windows-specific packaging files live in:
-- `WINDOWS BUILD/Windows_Build_Source/`
+## Build Windows app (PyInstaller)
 
-Recommended setup on Windows:
-1. Install Python 3.10+.
-2. Make sure Python is available as either `py` or `python`.
-3. If building manually, install:
+Windows packaging lives in `WINDOWS BUILD/Windows_Build_Source/`.
 
-```bash
-pip install pyside6 pypdf reportlab pandas openpyxl pyinstaller
-```
+**Fastest option on Windows:**
 
-Windows icon note:
-- Windows expects an `.ico` file instead of `.icns`
-- optional icon target: `SCU_logo.ico`
+1. Clone or download this repo
+2. Open `WINDOWS BUILD\Windows_Build_Source\`
+3. Double-click **`build_windows.bat`**
+4. Output: `dist_win\win_SCU_CBoards.zip`
 
-Fastest option on Windows:
-- copy `WINDOWS BUILD/Windows_Build_Source/` to a real Windows-local folder
-- open that copied folder in Windows
-- double-click `build_windows.bat`
-- it auto-detects Python
-- it installs/updates required packages
-- it builds into `dist_win\win_SCU_CBoards\`
-- it attempts to create `dist_win\win_SCU_CBoards.zip`
+**Requirements:** Python 3.10+, “Add to PATH” checked during install.
 
-Manual command-line option:
+More detail: [`WINDOWS BUILD/README.md`](WINDOWS%20BUILD/README.md) · [`BUILD_ON_PC.md`](WINDOWS%20BUILD/Windows_Build_Source/BUILD_ON_PC.md)
+
+**Manual command-line option:**
 
 ```bash
 cd "C:\path\to\Windows_Build_Source"
@@ -322,35 +357,45 @@ py -m PyInstaller --clean --windowed --noconfirm --name "win_SCU_CBoards" ^
   win_SCU_CBoards.py
 ```
 
-Windows build outputs:
+**Windows build outputs:**
+
 - `dist_win\win_SCU_CBoards\win_SCU_CBoards.exe`
 - shareable zip: `dist_win\win_SCU_CBoards.zip`
 
-Windows testing checklist:
-- app opens normally
-- `ClinicForms` is bundled and auto-detected
-- logo assets load correctly
-- paste flow works
-- header popups work
-- preview updates on edits
-- individual and batch PDFs generate correctly
-- top-sheet text placement looks correct
+**Windows testing checklist:**
+
+- [ ] App opens normally
+- [ ] `ClinicForms` is bundled and auto-detected
+- [ ] Logo assets load correctly
+- [ ] Paste flow works
+- [ ] Header popups work
+- [ ] Preview updates on edits
+- [ ] Individual and batch PDFs generate correctly
+- [ ] Top-sheet text placement looks correct
 
 ---
 
-## Distribution Notes
+## Distribution notes
+
 Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
 - **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
-Users can still override bundled forms via **Select Forms Folder**.
+Staff can still override bundled forms via **Select Forms Folder** in the app.
 
 ---
 
-## Troubleshooting Quick Notes
-- **Top sheet fields scrambled**: use the latest build with header-based alignment and the no-header shift prompt fallback.
-- **Missing language form**: verify the file exists in the requested language, `default`, or `english`.
-- **Blurry/missing logo**: ensure `white_logo_ui.png` and `logo.png` are present and bundled.
-- **Mac build conflicts**: build into `MAC BUILD/` using the documented command.
-- **Windows build conflicts**: build only from a clean copied `WINDOWS BUILD/Windows_Build_Source/` folder on Windows.
+## Troubleshooting quick notes 🔧
+
+| Issue | Fix |
+|---|---|
+| Top sheet fields scrambled | Use the latest build with header-based alignment and the no-header shift prompt fallback |
+| Missing language form | Verify the file exists in the requested language, `default`, or `english` |
+| Blurry/missing logo | Ensure `white_logo_ui.png` and `logo.png` are present and bundled |
+| Mac build huge or conflicts | Build with the minimal venv in `MAC BUILD/` — see above |
+| Windows build conflicts | Build only from a clean copy of `WINDOWS BUILD/Windows_Build_Source/` on a real Windows PC |
+
+---
+
+*Questions? Ask your clinic coordinator or whoever sent you this repo link. You’ve got this. 💚*
