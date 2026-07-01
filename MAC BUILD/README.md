@@ -1,19 +1,25 @@
 # MAC BUILD
 
-## Download and run (staff)
+## Download and run (clinic staff)
 
-**Mac only** — Windows staff should use `WINDOWS BUILD/README.md` instead.
+**Mac only** — if you use Windows, see [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/README.md) instead.
 
-- Release page: [macOS App (SCU_Clipboard_Builder)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
-- Direct download: [SCU_Clipboard_Builder.app.zip](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip)
+**Start here:** [macOS App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
-Steps:
-1. Download the zip from the link above.
-2. Unzip it.
-3. Open `SCU_Clipboard_Builder.app`.
-4. If macOS blocks launch, use right-click -> **Open**, or **Privacy & Security** -> **Open Anyway**.
+That page has friendly step-by-step instructions written for clinic volunteers. Scroll to **Assets** at the bottom to download `SCU_Clipboard_Builder.app.zip`.
+
+### Quick reminder
+
+1. Open the release page link above.
+2. Download **`SCU_Clipboard_Builder.app.zip`** from **Assets**.
+3. Unzip it.
+4. Open **`SCU_Clipboard_Builder.app`**.
+
+If macOS blocks the app, the release page explains how to use **Open** or **Open Anyway**.
 
 Local copy (for maintainers): `MAC BUILD/dist/SCU_Clipboard_Builder.app.zip`
+
+---
 
 ## Build from source (developers)
 

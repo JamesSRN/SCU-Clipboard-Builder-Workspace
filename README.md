@@ -8,21 +8,23 @@ Primary goals:
 - Let staff paste directly from Sheets/Excel and verify packets quickly.
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
-## Pre-built Apps
+## Pre-built Apps (for clinic staff)
 
-Mac and Windows are **separate downloads** on GitHub Releases — staff should use only the link for their computer.
+Thank you for volunteering — use the link for **your computer only** (Mac and Windows are separate).
 
-### macOS staff
-- Release: [macOS App (SCU_Clipboard_Builder)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
-- Direct download: [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip)
-- More detail: `MAC BUILD/README.md`
+Each link opens a **release page** with step-by-step install instructions. Scroll to **Assets** at the bottom of that page to download the file.
 
-### Windows staff
-- Release: [Windows App (win_SCU_CBoards)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/windows-app-2026-07-01)
-- Direct download: [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip)
-- More detail: `WINDOWS BUILD/README.md`
+### Mac (macOS)
+**Start here:** [macOS App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
-Do **not** use `releases/latest` links — that URL only points to the Windows zip. Mac and Windows are published as separate releases with explicit links below.
+More detail in `MAC BUILD/README.md`.
+
+### Windows
+**Start here:** [Windows App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
+
+More detail in `WINDOWS BUILD/README.md`.
+
+All releases: [GitHub Releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -334,20 +336,10 @@ Windows testing checklist:
 ---
 
 ## Distribution Notes
-Windows staff:
-- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/windows-app-2026-07-01/win_SCU_CBoards.zip) from GitHub Releases
-- in File Explorer, right-click the zip -> **Extract All...** -> **Extract**
-- open the extracted `win_SCU_CBoards` folder (not the zip file itself)
-- double-click `win_SCU_CBoards.exe`
-- if Windows shows **Windows protected your PC**, click **More info** -> **Run anyway**
-- do not run `build_windows.bat`; that script is only for creating a new Windows build
+Clinic staff should open the **release page** for their computer (instructions and download are on the same page):
 
-macOS staff:
-- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/macos-app-2026-07-01/SCU_Clipboard_Builder.app.zip) from GitHub Releases
-- unzip it
-- open `SCU_Clipboard_Builder.app`
-- if blocked, use right-click -> **Open**
-- if still blocked, use **Privacy & Security** -> **Open Anyway**
+- **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
+- **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
 
 Users can still override bundled forms via **Select Forms Folder**.
 
