@@ -1,36 +1,55 @@
-# WINDOWS BUILD
+# WINDOWS BUILD 💻
 
 Looking to get started? Check out the **Windows release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02).
 
 ---
 
-**Windows only** — if you use a Mac, see [`MAC BUILD/README.md`](../MAC%20BUILD/README.md) instead.
+**The Saturday Clinic** · free care for uninsured patients in Milwaukee
 
-**Start here:** [Windows App — SCU Clipboard Builder (July 2026)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
+Are you setting up front desk today on **Windows**? You're gonna want this tool.
 
-Install guide for **The Saturday Clinic Front Desk Manager** — copy the schedule from the **Visit Tracker** on **Box**, generate clipboards automatically, stress-free. Scroll to **Assets** at the bottom of that page to download `win_SCU_CBoards.zip`.
+The **SCU Clipboard Builder** turns the patient schedule into ready-to-print clipboard packets automatically. Just copy the schedule from the **Visit Tracker** on **Box**, paste it into the app, click **Generate**, and print. Done. ✨
 
-### Quick reminder
+New to this? Don't worry — everything you need is on the release page:
 
-1. Open the release page link above.
-2. Download **`win_SCU_CBoards.zip`** from **Assets**.
-3. **Extract All** in File Explorer — do not open the zip directly.
-4. Double-click **`win_SCU_CBoards.exe`** inside the extracted folder.
-5. If Windows shows **“Windows protected your PC”** — click **More info** → **Run anyway**. This is normal; you’re not doing anything wrong.
+**[Start Here → Windows install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)**
 
-Full step-by-step instructions are on the release page. Troubleshooting is there too, tucked below the main steps.
+Scroll to **Assets** at the bottom of that page to download the zip file.
 
-**Note:** Updates to this GitHub repo do not automatically update the app on your computer. When there is a new release, download again from the release page.
+On a **Mac** instead? See [`MAC BUILD/README.md`](../MAC%20BUILD/README.md).
 
 ---
 
-## Build from source (developers)
+<details>
+<summary><strong>Quick reminder</strong> — if you already downloaded the app</summary>
+
+1. Download **`win_SCU_CBoards.zip`** from **Assets** on the release page
+2. **Extract All** in File Explorer — do not open the zip directly
+3. Double-click **`win_SCU_CBoards.exe`** inside the extracted folder
+4. If Windows shows **“Windows protected your PC”**: **More info** → **Run anyway** (normal the first time)
+
+Full step-by-step instructions and troubleshooting are on the [release page](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02).
+
+**Note:** Updates to this GitHub repo do not automatically update the app on your PC. When there is a new release, download again from the release page.
+
+</details>
+
+<details>
+<summary><strong>Build from source 🛠️</strong> — for maintainers only</summary>
+
+Front desk staff do **not** need this section — use the release download above. Do **not** run `build_windows.bat` unless you are rebuilding the app.
 
 Source and build script are **already on GitHub** — no Mac needed.
 
-1. On your PC, download the repo: [SCU-Clipboard-Builder-Workspace](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace) → **Code** → **Download ZIP** (or `git clone` the repo).
+1. On your PC, download the repo: [SCU-Clipboard-Builder-Workspace](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace) → **Code** → **Download ZIP** (or `git clone` the repo)
 2. Open folder: `WINDOWS BUILD\Windows_Build_Source\`
 3. Double-click **`build_windows.bat`**
-4. When finished, use **`win_SCU_CBoards.zip`** in that folder (extract → run `win_SCU_CBoards.exe`).
+4. When finished, use **`win_SCU_CBoards.zip`** in `dist_win\` (extract → run `win_SCU_CBoards.exe`)
 
-Step-by-step guide: [`Windows_Build_Source/BUILD_ON_PC.md`](Windows_Build_Source/BUILD_ON_PC.md)
+More detail: [`Windows_Build_Source/BUILD_ON_PC.md`](Windows_Build_Source/BUILD_ON_PC.md)
+
+</details>
+
+---
+
+*Questions? Ask your clinic coordinator or whoever sent you this repo link. You've got this. 💚*
