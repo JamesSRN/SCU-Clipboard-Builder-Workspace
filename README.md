@@ -9,8 +9,8 @@ Primary goals:
 - Generate consistent, correctly ordered packets in both single and batch workflows.
 
 ## Pre-built Apps
-- **macOS:** download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/SCU_Clipboard_Builder.app.zip) from GitHub Releases, unzip, then open `SCU_Clipboard_Builder.app`.
-- **Windows:** download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/win_SCU_CBoards.zip) from GitHub Releases, extract all, then open `win_SCU_CBoards.exe`.
+- **macOS:** download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/clipboard-builder-2026-07-01/SCU_Clipboard_Builder.app.zip) from GitHub Releases, unzip, then open `SCU_Clipboard_Builder.app`.
+- **Windows:** download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/clipboard-builder-2026-07-01/win_SCU_CBoards.zip) from GitHub Releases, extract all, then open `win_SCU_CBoards.exe`.
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -323,14 +323,15 @@ Windows testing checklist:
 
 ## Distribution Notes
 Windows staff:
-- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/win_SCU_CBoards.zip) from GitHub Releases
-- extract all
-- open the extracted folder
+- download [`win_SCU_CBoards.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/clipboard-builder-2026-07-01/win_SCU_CBoards.zip) from GitHub Releases
+- in File Explorer, right-click the zip -> **Extract All...** -> **Extract**
+- open the extracted `win_SCU_CBoards` folder (not the zip file itself)
 - double-click `win_SCU_CBoards.exe`
+- if Windows shows **Windows protected your PC**, click **More info** -> **Run anyway**
 - do not run `build_windows.bat`; that script is only for creating a new Windows build
 
 macOS staff:
-- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/latest/download/SCU_Clipboard_Builder.app.zip) from GitHub Releases
+- download [`SCU_Clipboard_Builder.app.zip`](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/download/clipboard-builder-2026-07-01/SCU_Clipboard_Builder.app.zip) from GitHub Releases
 - unzip it
 - open `SCU_Clipboard_Builder.app`
 - if blocked, use right-click -> **Open**
