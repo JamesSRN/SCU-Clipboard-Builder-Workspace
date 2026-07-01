@@ -33,8 +33,8 @@ Room_*.pdf
 _debug*.pdf
 
 # Other archival junk
-OTHER FILES/__pycache__/
-OTHER FILES/Translated into Chinese-selected/
+APP FILES/OTHER FILES/__pycache__/
+APP FILES/OTHER FILES/Translated into Chinese-selected/
 
 # Separate project (not part of clipboard builder)
-website-redesign/
+APP FILES/website-redesign/

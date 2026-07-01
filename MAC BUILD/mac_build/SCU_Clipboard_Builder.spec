@@ -3,6 +3,7 @@ import os
 
 # Repo root: MAC BUILD/mac_build -> MAC BUILD -> SCU
 PROJECT_ROOT = os.path.abspath(os.path.join(SPECPATH, "..", ".."))
+APP_FILES = os.path.join(PROJECT_ROOT, "APP FILES")
 
 # Packages not used by SCU_CBoards.py. Keep these out even if present in the build env.
 EXCLUDES = [
@@ -26,13 +27,13 @@ EXCLUDES = [
 ]
 
 a = Analysis(
-    [os.path.join(PROJECT_ROOT, "SCU_CBoards.py")],
-    pathex=[PROJECT_ROOT],
+    [os.path.join(APP_FILES, "SCU_CBoards.py")],
+    pathex=[APP_FILES, PROJECT_ROOT],
     binaries=[],
     datas=[
-        (os.path.join(PROJECT_ROOT, "APP SOURCE", "ClinicForms"), "ClinicForms"),
-        (os.path.join(PROJECT_ROOT, "logo.png"), "."),
-        (os.path.join(PROJECT_ROOT, "white_logo_ui.png"), "."),
+        (os.path.join(APP_FILES, "APP SOURCE", "ClinicForms"), "ClinicForms"),
+        (os.path.join(APP_FILES, "logo.png"), "."),
+        (os.path.join(APP_FILES, "white_logo_ui.png"), "."),
     ],
     hiddenimports=[],
     hookspath=[],
@@ -60,7 +61,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=[os.path.join(PROJECT_ROOT, "SCU_logo.icns")],
+    icon=[os.path.join(APP_FILES, "SCU_logo.icns")],
 )
 coll = COLLECT(
     exe,
@@ -74,6 +75,6 @@ coll = COLLECT(
 app = BUNDLE(
     coll,
     name="SCU_Clipboard_Builder.app",
-    icon=os.path.join(PROJECT_ROOT, "SCU_logo.icns"),
+    icon=os.path.join(APP_FILES, "SCU_logo.icns"),
     bundle_identifier=None,
 )

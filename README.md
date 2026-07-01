@@ -55,19 +55,21 @@ This GitHub repo is the **workspace** — source code, clinic forms, and build s
 
 ```text
 SCU/
-├── APP SOURCE/          ← live app code + ClinicForms PDFs
-├── MAC BUILD/           ← Mac packaging (PyInstaller)
-├── WINDOWS BUILD/       ← Windows packaging + build_windows.bat
-├── OTHER FILES/         ← older reference / debug material
-└── SCU_CBoards.py       ← main app entry point
+├── README.md            ← start here (you are here)
+├── MAC BUILD/           ← Mac install link + Mac rebuild tools
+├── WINDOWS BUILD/       ← Windows install link + Windows rebuild tools
+└── APP FILES/           ← app source, forms, logos, archives
+    ├── SCU_CBoards.py   ← main app entry point
+    ├── APP SOURCE/      ← live ClinicForms PDFs
+    └── OTHER FILES/     ← older reference / debug material
 ```
 
 **Practical intent:**
 
-- Source code and live forms stay tied to the main project
-- Mac build outputs live under `MAC BUILD/`
-- Windows build source/output lives under `WINDOWS BUILD/`
-- Older/debug/reference material lives under `OTHER FILES/`
+- Front desk staff use **release downloads** — not folders in this repo
+- App source and live forms live under `APP FILES/`
+- Mac packaging lives under `MAC BUILD/`
+- Windows packaging lives under `WINDOWS BUILD/`
 
 </details>
 
@@ -81,7 +83,7 @@ Everything in this section is for maintainers, builders, and curious volunteers 
 <details>
 <summary><strong>Main script</strong></summary>
 
-- **Entry point:** `SCU_CBoards.py`
+- **Entry point:** `APP FILES/SCU_CBoards.py`
 - **Core classes:**
   - `PDFProcessor` — form path resolution, top-sheet personalization, PDF merge
   - `ClinicApp` — Qt UI, spreadsheet paste/edit, patient parsing, preview, output actions
@@ -220,7 +222,7 @@ Extra optional forms not in the explicit map are inserted **before** `vitals_she
 <summary><strong>Form folder layout + naming</strong></summary>
 
 ```text
-APP SOURCE/ClinicForms/
+APP FILES/APP SOURCE/ClinicForms/
 ├── english/
 ├── spanish/
 ├── mandarin/
@@ -260,7 +262,7 @@ Resource discovery supports running from source or from the packaged `.app` / `.
 
 **Bundled runtime assets:** `ClinicForms/` · `logo.png` · `white_logo_ui.png`
 
-During local development, the app auto-detects forms from `APP SOURCE/ClinicForms/` or bundled `ClinicForms/` inside packaged builds.
+During local development, the app auto-detects forms from `APP FILES/APP SOURCE/ClinicForms/` or bundled `ClinicForms/` inside packaged builds.
 
 Displayed log paths are sanitized to avoid personal path leakage.
 
@@ -271,7 +273,7 @@ Displayed log paths are sanitized to avoid personal path leakage.
 
 ```bash
 cd "/path/to/SCU"
-python3 SCU_CBoards.py
+python3 "APP FILES/SCU_CBoards.py"
 ```
 
 Use a venv with `pyside6`, `pypdf`, `reportlab`, and `pillow` installed — see `MAC BUILD/mac_build/requirements-build.txt`.

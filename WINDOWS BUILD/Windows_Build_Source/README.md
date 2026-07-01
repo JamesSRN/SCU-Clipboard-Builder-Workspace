@@ -19,26 +19,12 @@ The workspace is organized into four long-term buckets:
 
 ```text
 SCU/
-├── APP SOURCE/
-│   ├── ClinicForms/
-│   └── icon.iconset/
+├── README.md
+├── APP FILES/           ← main app source + ClinicForms
 ├── MAC BUILD/
-│   ├── build/
-│   ├── dist/
-│   ├── mac_build/
-│   └── repo_export_mac/
-├── WINDOWS BUILD/
-│   ├── Windows_Build_Source/
-│   └── repo_export_windows/
-├── OTHER FILES/
-└── top-level source/docs/assets still in active use
+└── WINDOWS BUILD/
+    └── Windows_Build_Source/   ← this folder (Windows PC build)
 ```
-
-Practical intent:
-- source code and live forms stay tied to the main project
-- Mac packaging outputs live under `MAC BUILD/`
-- Windows packaging source/output lives under `WINDOWS BUILD/`
-- older/debug/reference material lives under `OTHER FILES/`
 
 ---
 
@@ -51,7 +37,7 @@ Practical intent:
 ---
 
 ## Main Script
-- Entry point: `SCU_CBoards.py`
+- Entry point (repo): `APP FILES/SCU_CBoards.py` · (this folder): `SCU_CBoards.py`
 - Core classes:
   - `PDFProcessor`: form path resolution, top-sheet personalization, PDF merge.
   - `ClinicApp`: Qt UI, spreadsheet paste/edit, patient parsing, preview, output actions.
@@ -190,7 +176,7 @@ Preview/source labels:
 Expected structure:
 
 ```text
-APP SOURCE/ClinicForms/
+APP FILES/APP SOURCE/ClinicForms/
 ├── english/
 ├── spanish/
 ├── mandarin/
@@ -231,7 +217,7 @@ Bundled runtime assets:
 - `white_logo_ui.png`
 
 During local development, the app auto-detects forms from:
-- `APP SOURCE/ClinicForms/`
+- `APP FILES/APP SOURCE/ClinicForms/`
 - or bundled `ClinicForms/` inside packaged builds
 
 Displayed log paths are sanitized to avoid personal path leakage.
