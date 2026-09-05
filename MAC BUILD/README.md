@@ -1,6 +1,6 @@
 # MAC BUILD 🍎
 
-Looking to get started? Check out the **Mac release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01).
+Looking to get started? Check out the **Mac release page** [here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05).
 
 ---
 
@@ -12,7 +12,7 @@ The **SCU Clipboard Builder** turns the patient schedule into ready-to-print cli
 
 New to this? Don't worry — everything you need is on the release page:
 
-**[Start Here → Mac install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)**
+**[Start Here → Mac install instructions + download](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05)**
 
 Scroll to **Assets** at the bottom of that page to download the zip file.
 
@@ -32,7 +32,7 @@ On **Windows** instead? See [`WINDOWS BUILD/README.md`](../WINDOWS%20BUILD/READM
 3. Open **`SCU_Clipboard_Builder.app`**
 4. **Expect a security prompt — that's totally normal.** If macOS blocks the app, **right-click** → **Open** → **Open** again (or **Open Anyway** in Privacy & Security). You're not doing anything wrong.
 
-Full step-by-step instructions and troubleshooting are on the [release page](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01).
+Full step-by-step instructions and troubleshooting are on the [release page](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05).
 
 **Note:** Updates to this GitHub repo do not automatically update the app on your Mac. When there is a new release, download again from the release page.
 

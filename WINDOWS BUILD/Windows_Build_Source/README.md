@@ -12,7 +12,7 @@ Primary goals:
 For **The Saturday Clinic Front Desk Manager** — paste the schedule, generate clipboards automatically, stress-free. Open the **release page** for your computer:
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
-- **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
+- **Mac:** [macOS App — September 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05)
 
 ## Current Folder Layout
 The workspace is organized into four long-term buckets:
@@ -320,7 +320,7 @@ Windows testing checklist:
 Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
-- **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
+- **Mac:** [macOS App — September 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05)
 
 All releases: [GitHub Releases](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases)
 

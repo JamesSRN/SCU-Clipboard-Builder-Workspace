@@ -1,6 +1,7 @@
 import io
 import os
 import re
+import shutil
 import sys
 import tempfile
 from datetime import datetime
@@ -291,9 +292,13 @@ class ClinicApp(QMainWindow):
             return script_dir
 
         exe_dir = os.path.dirname(sys.executable)
+        # On macOS .app builds, real datas live in Contents/Resources.
+        # sys._MEIPASS is Contents/Frameworks, which only has a symlink to
+        # ClinicForms — that symlink often becomes an empty folder after unzip
+        # or OneDrive sync, so Resources must be preferred.
         resource_candidates = [
-            getattr(sys, "_MEIPASS", ""),
             os.path.normpath(os.path.join(exe_dir, "..", "Resources")),
+            getattr(sys, "_MEIPASS", ""),
             exe_dir,
             script_dir,
         ]
@@ -303,12 +308,28 @@ class ClinicApp(QMainWindow):
         return exe_dir
 
     @staticmethod
+    def _is_usable_forms_dir(path):
+        """A forms folder must contain top_sheet.pdf, not just exist as a directory."""
+        if not path or not os.path.isdir(path):
+            return False
+        return any(
+            os.path.isfile(candidate)
+            for candidate in (
+                os.path.join(path, "english", "top_sheet.pdf"),
+                os.path.join(path, "top_sheet.pdf"),
+            )
+        )
+
+    @staticmethod
     def _default_forms_dir():
         resource_base = ClinicApp._resource_base_dir()
         script_dir = os.path.dirname(os.path.abspath(__file__))
         candidates = []
         if getattr(sys, "frozen", False):
             exe_dir = os.path.dirname(sys.executable)
+            candidates.append(
+                os.path.normpath(os.path.join(exe_dir, "..", "Resources", "ClinicForms"))
+            )
             candidates.append(os.path.join(exe_dir, "_internal", "ClinicForms"))
         candidates.extend([
             os.path.join(resource_base, "ClinicForms"),
@@ -317,7 +338,7 @@ class ClinicApp(QMainWindow):
             os.path.join(script_dir, "APP SOURCE", "ClinicForms"),
         ])
         for candidate in candidates:
-            if os.path.isdir(candidate):
+            if ClinicApp._is_usable_forms_dir(candidate):
                 return candidate
         return ""
 
@@ -517,15 +538,25 @@ class ClinicApp(QMainWindow):
 
     def select_forms_folder(self):
         dir_path = QFileDialog.getExistingDirectory(self, "Select Forms Folder")
-        if dir_path:
-            self.forms_dir = dir_path
-            self.lbl_folder.setText(os.path.basename(dir_path))
-            self.log(f"Forms folder set: {self._display_forms_path(dir_path)}")
-            if self.patient_data:
-                self.preview_tree.clear()
-                for patient in self.patient_data:
-                    self.add_preview_item(patient)
-                self.log("Patient preview refreshed with resolved form paths.")
+        if not dir_path:
+            return
+        if not self._is_usable_forms_dir(dir_path):
+            QMessageBox.warning(
+                self,
+                "Wrong folder",
+                "That folder does not contain the clinic forms.\n\n"
+                "Choose the ClinicForms folder (it should have english / spanish / mandarin inside), "
+                "not the english folder and not an empty copy from OneDrive.",
+            )
+            return
+        self.forms_dir = dir_path
+        self.lbl_folder.setText(os.path.basename(dir_path))
+        self.log(f"Forms folder set: {self._display_forms_path(dir_path)}")
+        if self.patient_data:
+            self.preview_tree.clear()
+            for patient in self.patient_data:
+                self.add_preview_item(patient)
+            self.log("Patient preview refreshed with resolved form paths.")
 
     def paste_into_input_grid(self):
         text = QApplication.clipboard().text()
@@ -1056,6 +1087,24 @@ class ClinicApp(QMainWindow):
         self.log_box.clear()
         self.log("Session cleared. All PHI removed from memory.")
 
+    @staticmethod
+    def _write_pdf_atomically(writer, dest_path):
+        """Write a complete PDF locally, then copy it to the destination.
+
+        Saving directly into OneDrive/Box can let Preview open a 0-byte or
+        half-written file, which macOS reports as damaged.
+        """
+        fd, tmp_path = tempfile.mkstemp(suffix=".pdf")
+        try:
+            with os.fdopen(fd, "wb") as handle:
+                writer.write(handle)
+                handle.flush()
+                os.fsync(handle.fileno())
+            shutil.copy2(tmp_path, dest_path)
+        finally:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+
     def process_pdfs(self, batch=False):
         if not self.forms_dir:
             QMessageBox.warning(self, "Error", "Please select a forms folder first.")
@@ -1071,6 +1120,7 @@ class ClinicApp(QMainWindow):
             return
 
         batch_writer = PdfWriter() if batch else None
+        packets_ok = 0
 
         for p in self.patient_data:
             temp_top_sheet = None
@@ -1115,17 +1165,26 @@ class ClinicApp(QMainWindow):
                             "WARNING",
                         )
 
+                if not packet_writer.pages:
+                    self.log(
+                        f"No pages built for {p['name']} — check that ClinicForms was selected.",
+                        "WARNING",
+                    )
+                    continue
+
                 safe_name = p["name"].replace(" ", "_").replace(",", "")
                 safe_dob = p["dob"].replace("/", "-")
                 filename = f"Room_{p['room']}__{safe_name}__DOB_{safe_dob}.pdf"
                 final_path = os.path.join(output_dir, filename)
 
                 if batch:
-                    for page in packet_writer.pages:
-                        batch_writer.add_page(page)
+                    packet_buf = io.BytesIO()
+                    packet_writer.write(packet_buf)
+                    packet_buf.seek(0)
+                    batch_writer.append(packet_buf)
                 else:
-                    with open(final_path, "wb") as f:
-                        packet_writer.write(f)
+                    self._write_pdf_atomically(packet_writer, final_path)
+                packets_ok += 1
             except Exception as e:
                 self.log(f"Error processing {p['name']}: {e}", "ERROR")
             finally:
@@ -1133,14 +1192,34 @@ class ClinicApp(QMainWindow):
                     os.remove(temp_top_sheet)
 
         if batch:
+            if not packets_ok or not batch_writer.pages:
+                QMessageBox.critical(
+                    self,
+                    "Nothing to print",
+                    "No clipboard pages were generated, so a PDF was not saved.\n\n"
+                    "Click Select Forms Folder and choose the ClinicForms folder inside "
+                    "the extracted app (_internal\\ClinicForms).\n\n"
+                    "Then save to Desktop (not OneDrive) and try Generate again.",
+                )
+                self.log("Batch PDF not saved — 0 pages generated.", "ERROR")
+                return
             batch_path = os.path.join(
                 output_dir, f"Batch_Print_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
             )
-            with open(batch_path, "wb") as f:
-                batch_writer.write(f)
-            self.log(f"Batch file generated: {batch_path}")
+            self._write_pdf_atomically(batch_writer, batch_path)
+            page_count = len(batch_writer.pages)
+            size_mb = os.path.getsize(batch_path) / (1024 * 1024)
+            self.log(f"Batch file generated: {batch_path} ({page_count} pages, {size_mb:.1f} MB)")
+            QMessageBox.information(
+                self,
+                "Batch PDF ready",
+                f"Saved {page_count} pages ({size_mb:.1f} MB).\n\n"
+                f"{batch_path}\n\n"
+                "Wait until the file size finishes updating before opening. "
+                "If it still will not open, use Chrome or Edge.",
+            )
         else:
-            self.log("All individual PDFs generated.")
+            self.log(f"Individual PDFs generated for {packets_ok} patient(s).")
 
 
 if __name__ == "__main__":

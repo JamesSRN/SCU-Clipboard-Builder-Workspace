@@ -16,7 +16,7 @@ New to this? Don't worry — everything you need to get started can be found rig
 
 | | |
 |---|---|
-| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01) |
+| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05) |
 | 💻 **Windows** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
 
 Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the zip file.
@@ -367,7 +367,7 @@ py -m PyInstaller --clean --windowed --noconfirm --name "win_SCU_CBoards" ^
 Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
-- **Mac:** [macOS App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-07-01)
+- **Mac:** [macOS App — September 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-09-05)
 
 Staff can still override bundled forms via **Select Forms Folder** in the app.
 
