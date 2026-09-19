@@ -1,3 +1,4 @@
+import csv
 import io
 import os
 import re
@@ -564,7 +565,7 @@ class ClinicApp(QMainWindow):
             QMessageBox.warning(self, "Error", "Clipboard is empty! Copy your data first.")
             return
 
-        rows = [r.split("\t") for r in text.replace("\r\n", "\n").strip("\n").split("\n")]
+        rows = self._parse_clipboard_rows(text)
         while rows and not any(str(cell).strip() for cell in rows[0]):
             rows.pop(0)
         if not rows:
@@ -759,6 +760,47 @@ class ClinicApp(QMainWindow):
     @staticmethod
     def _normalize(s):
         return (s or "").strip().lower()
+
+    @staticmethod
+    def _normalize_cell(value):
+        """Collapse embedded tabs/newlines/repeated spaces to a single space, then strip.
+
+        Single spaces are preserved, so headers like "Patient Name" and values like
+        "English, Spanish" are unchanged. This cleans mis-typed names that carry stray
+        whitespace without disturbing any normal cell.
+        """
+        return re.sub(r"\s+", " ", str(value or "")).strip()
+
+    @staticmethod
+    def _parse_clipboard_rows(text):
+        """Parse pasted spreadsheet text into rows of cells (resilience layer).
+
+        Uses a proper RFC 4180-style TSV parser so a cell containing an embedded
+        newline, tab, or quote -- how Excel/Google Sheets export a mis-typed name --
+        stays inside a single cell instead of shattering the row and shifting the
+        DOB/Room/Language columns over by one.
+
+        Falls back to the original naive split if csv parsing ever fails or yields
+        nothing, so behavior can never be worse than before.
+        """
+        normalized = text.replace("\r\n", "\n").replace("\r", "\n").strip("\n")
+        rows = None
+        try:
+            reader = csv.reader(
+                io.StringIO(normalized),
+                delimiter="\t",
+                quotechar='"',
+                doublequote=True,
+            )
+            rows = [[ClinicApp._normalize_cell(cell) for cell in row] for row in reader]
+        except Exception:
+            rows = None
+        if not rows:
+            rows = [
+                [ClinicApp._normalize_cell(cell) for cell in line.split("\t")]
+                for line in normalized.split("\n")
+            ]
+        return [row for row in rows if any(cell for cell in row)]
 
     @staticmethod
     def _target_col_for_pasted_header(source_header):
