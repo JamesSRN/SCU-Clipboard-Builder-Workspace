@@ -5,6 +5,10 @@ import os
 PROJECT_ROOT = os.path.abspath(os.path.join(SPECPATH, "..", ".."))
 APP_FILES = os.path.join(PROJECT_ROOT, "APP FILES")
 
+import re as _re
+with open(os.path.join(APP_FILES, "SCU_CBoards.py"), encoding="utf-8") as _vf:
+    APP_VERSION = _re.search(r'^APP_VERSION\s*=\s*"([^"]+)"', _vf.read(), _re.M).group(1)
+
 # Packages not used by SCU_CBoards.py. Keep these out even if present in the build env.
 EXCLUDES = [
     "torch",
@@ -77,4 +81,8 @@ app = BUNDLE(
     name="SCU_Clipboard_Builder.app",
     icon=os.path.join(APP_FILES, "SCU_logo.icns"),
     bundle_identifier=None,
+    info_plist={
+        "CFBundleShortVersionString": APP_VERSION,
+        "CFBundleVersion": APP_VERSION,
+    },
 )

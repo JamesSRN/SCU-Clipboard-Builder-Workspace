@@ -72,6 +72,8 @@ EXCEPTION_FORMS_MAP = {
     "Welcome Packet": "welcome_packet.pdf",
 }
 
+APP_VERSION = "1.1.0"
+
 INPUT_GRID_HEADERS = [
     "Time",
     "Patient Name",
@@ -275,7 +277,7 @@ class PDFProcessor:
 class ClinicApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("SCU Clipboard Builder")
+        self.setWindowTitle(f"SCU Clipboard Builder v{APP_VERSION}")
         self.resize(1000, 700)
 
         self.forms_dir = self._default_forms_dir()
