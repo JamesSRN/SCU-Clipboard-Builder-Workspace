@@ -584,12 +584,17 @@ class ClinicApp(QMainWindow):
         source_to_target = []
         ignored_headers = []
         ignored_source_indices = []
+        skipped_name_headers = []
         if pasted_headers:
             for source_idx, source_header in enumerate(pasted_headers):
                 mapped_idx = self._target_col_for_pasted_header(source_header)
                 if mapped_idx < 0:
-                    ignored_headers.append(str(source_header).strip())
-                    ignored_source_indices.append(source_idx)
+                    label = str(source_header).strip()
+                    if self._is_split_name_header(source_header):
+                        skipped_name_headers.append(label)
+                    else:
+                        ignored_headers.append(label)
+                        ignored_source_indices.append(source_idx)
                 source_to_target.append(mapped_idx)
 
         self._suppress_auto_preview = True
@@ -695,6 +700,12 @@ class ClinicApp(QMainWindow):
                     "Ignored Columns",
                     "\n".join(popup_lines),
                 )
+            if skipped_name_headers:
+                self.log(
+                    "Skipped "
+                    + ", ".join(skipped_name_headers)
+                    + ". Patient Name already includes first and last."
+                )
         else:
             self.log("Pasted clipboard data into input spreadsheet.")
             QMessageBox.warning(
@@ -772,6 +783,23 @@ class ClinicApp(QMainWindow):
             if any(alias in normalized_source or normalized_source in alias for alias in aliases):
                 return idx
         return -1
+
+    @staticmethod
+    def _is_split_name_header(source_header):
+        """Pt First and Pt Last on the visit tracker. Patient Name already has both."""
+        label = " ".join(ClinicApp._normalize(source_header).split())
+        return label in {
+            "pt first",
+            "pt last",
+            "pt first name",
+            "pt last name",
+            "first name",
+            "last name",
+            "patient first",
+            "patient last",
+            "first",
+            "last",
+        }
 
     @staticmethod
     def _is_marked(value):
