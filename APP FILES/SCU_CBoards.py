@@ -30,6 +30,7 @@ from PySide6.QtWidgets import (
 from pypdf import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
+from reportlab.lib.colors import HexColor
 
 
 # --- CONFIGURATION & CONSTANTS ---
@@ -114,6 +115,29 @@ SPECIALTY_SHORT_NAMES = {
     "cct": "CCT",
 }
 
+# Top sheet badge colors (fill, text), matching the visit tracker Specialty list.
+# A specialty not listed here gets SPECIALTY_DEFAULT_COLORS (gray).
+SPECIALTY_COLORS = {
+    "PCP": ("#FFFFFF", "#000000"),
+    "Allergy": ("#D9D2E9", "#4B3A8C"),
+    "Cardio": ("#F4CCCC", "#990000"),
+    "Derm": ("#FCE5CD", "#B45F06"),
+    "Endo": ("#FFF2CC", "#7F6000"),
+    "GI": ("#D9EAD3", "#274E13"),
+    "Gen Surg": ("#D0E8EA", "#1C5A5E"),
+    "Hand Surg": ("#EAD1DC", "#741B47"),
+    "Heme": ("#E6B8AF", "#85200C"),
+    "Neuro": ("#B4A7D6", "#20124D"),
+    "SOMA": ("#A2C4C9", "#0C343D"),
+    "ENT": ("#FFE599", "#7F6000"),
+    "PM&R": ("#B6D7A8", "#274E13"),
+    "Psych": ("#D5A6BD", "#4C1130"),
+    "Rheum": ("#F9CB9C", "#783F04"),
+    "Uro": ("#A4C2F4", "#1C4587"),
+    "CCT": ("#76A5AF", "#FFFFFF"),
+}
+SPECIALTY_DEFAULT_COLORS = ("#EEEEEE", "#333333")
+
 INPUT_GRID_HEADERS = [
     "Time",
     "Patient Name",
@@ -187,6 +211,57 @@ class PDFProcessor:
         tx = x1 + 4.0
         ty = y1 + max(1.0, (height - size) / 2.0)
         c.drawString(tx, ty, value)
+
+    @staticmethod
+    def _draw_specialty_badge(c, specialty, room_rect, page_width):
+        """Colored SPECIALTY box under Room Number. Skipped when there is no specialty."""
+        if not specialty:
+            return
+        first = specialty.split(",")[0].strip()
+        fill, text = SPECIALTY_COLORS.get(first, SPECIALTY_DEFAULT_COLORS)
+        edge = fill if text.upper() == "#FFFFFF" else text
+        box_w, box_h = 152.0, 52.0
+        right = min(page_width - 12.0, room_rect[2])
+        x = right - box_w
+        y = room_rect[1] - 19.0 - box_h
+        c.saveState()
+        c.setFillColor(HexColor(fill))
+        c.setStrokeColor(HexColor(edge))
+        c.setLineWidth(1.5)
+        c.roundRect(x, y, box_w, box_h, 8, fill=1, stroke=1)
+        c.setFillColor(HexColor(text))
+        c.setFont("Helvetica-Bold", 9)
+        c.drawCentredString(x + box_w / 2, y + 38.0, "SPECIALTY")
+        label = specialty.upper()
+        size = 24.0
+        while size > 10.0 and pdfmetrics.stringWidth(label, "Helvetica-Bold", size) > box_w - 12.0:
+            size -= 1.0
+        c.setFont("Helvetica-Bold", size)
+        c.drawCentredString(x + box_w / 2, y + 9.0, label)
+        c.restoreState()
+
+    @staticmethod
+    def _draw_specialty_line(c, specialty, dob_rect, name_rect):
+        """'Specialty: ____' line under Date of Birth. Returns the line's y position."""
+        label_x = name_rect[0] - 87.0 if name_rect else 60.0
+        label_x = max(36.0, label_x)
+        y = dob_rect[1] - 33.0
+        c.saveState()
+        c.setFillColor(HexColor("#000000"))
+        c.setStrokeColor(HexColor("#000000"))
+        c.setFont("Helvetica-Bold", 11)
+        c.drawString(label_x, y + 2.0, "Specialty:")
+        line_x1 = label_x + 58.0
+        c.setLineWidth(0.6)
+        c.line(line_x1, y, line_x1 + 182.0, y)
+        if specialty:
+            size = 16.0
+            while size > 8.0 and pdfmetrics.stringWidth(specialty, "Helvetica-Bold", size) > 176.0:
+                size -= 0.5
+            c.setFont("Helvetica-Bold", size)
+            c.drawString(line_x1 + 4.0, y + 3.0, specialty)
+        c.restoreState()
+        return y
 
     @staticmethod
     def _candidate_filenames(filename, language_label=None):
@@ -276,12 +351,18 @@ class PDFProcessor:
                 if rect:
                     PDFProcessor._draw_text_in_rect(c, value, rect)
 
-            # Add compact included-forms list below DOB area.
+            specialty = str(patient_data.get("specialty", "") or "")
+            room_rect = rects.get("Room Number")
+            if room_rect:
+                PDFProcessor._draw_specialty_badge(c, specialty, room_rect, width)
+
+            # Specialty line, then a compact included-forms list, below the DOB area.
             dob_rect = rects.get("Date of Birth")
             name_rect = rects.get("Patient Name")
             if dob_rect and name_rect:
+                specialty_y = PDFProcessor._draw_specialty_line(c, specialty, dob_rect, name_rect)
                 list_x = max(36.0, name_rect[0])
-                list_y = dob_rect[1] - 18.0
+                list_y = specialty_y - 22.0
                 c.setFont("Helvetica-Bold", 9)
                 c.drawString(list_x, list_y, "Included Forms:")
                 c.setFont("Helvetica", 8)
@@ -301,6 +382,8 @@ class PDFProcessor:
             c.drawString(width * 0.24, height * 0.39, field_values["Patient Name"])
             c.drawString(width * 0.23, height * 0.23, field_values["Date of Birth"])
             c.drawString(width * 0.63, height * 0.23, field_values["Language"])
+            if patient_data.get("specialty"):
+                c.drawString(width * 0.24, height * 0.18, f"Specialty: {patient_data['specialty']}")
         c.save()
         overlay_stream.seek(0)
 
