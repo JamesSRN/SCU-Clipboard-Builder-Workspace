@@ -16,7 +16,7 @@ New to this? Don't worry — everything you need to get started can be found rig
 
 | | |
 |---|---|
-| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-10-16) |
+| 🍎 **Mac** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-10-29) |
 | 💻 **Windows** | [Start Here](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02) |
 
 Each link opens a **release page** with step-by-step instructions. Scroll to **Assets** at the bottom to download the zip file.
@@ -100,16 +100,20 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 1. `Time`
 2. `Patient Name`
 3. `DOB`
-4. `Room`
-5. `Language`
-6. `Initial Visit Intake`
-7. `Annual Demographics`
-8. `Specialty Clinics Consent`
-9. `Care Message`
-10. `PHQ 2-9`
-11. `GAD 7`
-12. `TB`
-13. `Welcome Packet`
+4. `Specialty`
+5. `Room`
+6. `Language`
+7. `Initial Visit Intake`
+8. `Annual Demographics`
+9. `Specialty Clinics Consent`
+10. `Care Message`
+11. `PHQ 2-9`
+12. `GAD 7`
+13. `TB`
+14. `SOMA`
+15. `Welcome Packet`
+
+`Pt Last` and `Pt First` from the Visit Tracker are skipped (Patient Name already has both). `Specialty` is matched exactly, so it never collides with `Specialty Clinics Consent`.
 
 **Parsing behavior:**
 
@@ -122,7 +126,7 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 - If no header row is pasted, the app falls back to built-in default headers and shows a warning asking staff to include headers
 - After a header-row paste, the app shows:
   - a `Column Check` popup saying whether recognized columns already match or were re-aligned
-  - a second `Ignored Columns` popup if unsupported columns such as `SOMA` were skipped
+  - a second `Ignored Columns` popup if unrecognized columns were skipped
 - Any non-blank marker in optional form columns counts as selected (`x`, `need`, `fill`, etc.)
 - If a true no-header paste looks shifted left by one column, the app still offers the older right-shift correction flow
 - When a visible shift is applied, the info log records only the first populated row’s moved values and target headers
@@ -136,7 +140,9 @@ The app uses an in-app spreadsheet (`QTableWidget`) with default columns:
 
 Top sheet template filename: `top_sheet.pdf`
 
-**Filled fields:** Patient Name · Date of Birth · Room Number · Language
+**Filled fields:** Patient Name · Date of Birth · Room Number · Language · Specialty
+
+**Specialty:** a colored `SPECIALTY` badge under Room Number (Visit Tracker colors) and a `Specialty:` line under Date of Birth. Patients with no specialty get no badge and a blank line. Known specialties are shortened (Cardiology → Cardio, Dermatology → Derm). A specialty not on the list prints as typed with a gray badge, so new clinics need no app update. Short names and badge colors live in `SPECIALTY_SHORT_NAMES` and `SPECIALTY_COLORS` in `SCU_CBoards.py`.
 
 **Implementation details:**
 
@@ -367,7 +373,7 @@ py -m PyInstaller --clean --windowed --noconfirm --name "win_SCU_CBoards" ^
 Front Desk Manager: open the **release page** for your computer (instructions and download are on the same page):
 
 - **Windows:** [Windows App — July 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/Windows-App-2026-07-02)
-- **Mac:** [macOS App — October 2026](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-10-16)
+- **Mac:** [macOS App — October 29, 2026 (v1.2.0)](https://github.com/JamesSRN/SCU-Clipboard-Builder-Workspace/releases/tag/macos-app-2026-10-29)
 
 Staff can still override bundled forms via **Select Forms Folder** in the app.
 
