@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/scu_emblem_gold.png" alt="Saturday Clinic for the Uninsured emblem" width="200">
+</p>
+
 # SCU Clipboard Builder
 
 **The Saturday Clinic** · free care for uninsured patients in Milwaukee · built to make clinic morning easier
