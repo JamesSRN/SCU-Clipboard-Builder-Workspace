@@ -72,7 +72,7 @@ EXCEPTION_FORMS_MAP = {
     "Welcome Packet": "welcome_packet.pdf",
 }
 
-APP_VERSION = "1.1.0"
+APP_VERSION = "1.1.1"
 
 INPUT_GRID_HEADERS = [
     "Time",
@@ -588,13 +588,18 @@ class ClinicApp(QMainWindow):
         ignored_headers = []
         ignored_source_indices = []
         skipped_name_headers = []
+        skipped_other_headers = []
         if pasted_headers:
             for source_idx, source_header in enumerate(pasted_headers):
                 mapped_idx = self._target_col_for_pasted_header(source_header)
                 if mapped_idx < 0:
                     label = str(source_header).strip()
-                    if self._is_split_name_header(source_header):
+                    if not label:
+                        pass  # blank header cell: nothing to paste, nothing to report
+                    elif self._is_split_name_header(source_header):
                         skipped_name_headers.append(label)
+                    elif self._is_unused_tracker_header(source_header):
+                        skipped_other_headers.append(label)
                     else:
                         ignored_headers.append(label)
                         ignored_source_indices.append(source_idx)
@@ -709,6 +714,12 @@ class ClinicApp(QMainWindow):
                     + ", ".join(skipped_name_headers)
                     + ". Patient Name already includes first and last."
                 )
+            if skipped_other_headers:
+                self.log(
+                    "Skipped "
+                    + ", ".join(skipped_other_headers)
+                    + ". Not needed for clipboards."
+                )
         else:
             self.log("Pasted clipboard data into input spreadsheet.")
             QMessageBox.warning(
@@ -807,6 +818,9 @@ class ClinicApp(QMainWindow):
     @staticmethod
     def _target_col_for_pasted_header(source_header):
         normalized_source = ClinicApp._normalize(source_header)
+        if not normalized_source:
+            # Blank header cells (e.g. side tables copied past the last column) map to nothing.
+            return -1
         header_aliases = [
             ["time"],
             ["patient name", "name"],
@@ -824,7 +838,9 @@ class ClinicApp(QMainWindow):
             ["welcome packet education", "welcome packet"],
         ]
         for idx, aliases in enumerate(header_aliases):
-            if any(alias in normalized_source or normalized_source in alias for alias in aliases):
+            # Only match when the alias appears inside the header. The reverse check let short
+            # headers such as "Specialty" match longer aliases ("specialty clinics consent").
+            if any(alias in normalized_source for alias in aliases):
                 return idx
         return -1
 
@@ -844,6 +860,12 @@ class ClinicApp(QMainWindow):
             "first",
             "last",
         }
+
+    @staticmethod
+    def _is_unused_tracker_header(source_header):
+        """Visit tracker columns the clipboard does not need (Specialty)."""
+        label = " ".join(ClinicApp._normalize(source_header).split())
+        return label in {"specialty", "specialty clinic name", "clinic"}
 
     @staticmethod
     def _is_marked(value):
