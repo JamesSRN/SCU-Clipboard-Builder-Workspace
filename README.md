@@ -7,9 +7,9 @@
 **The Saturday Clinic** · free care for uninsured patients in Milwaukee · built to make clinic morning easier
 
 > [!TIP]
-> 💊 **Looking for dispensary labels?** → [SCU Dispensary Label Tool](https://github.com/JamesSRN/scu-label-tool/releases)
+> 💊 **Looking for dispensary labels?** → [SCU Dispensary Label Tool](https://github.com/JamesSRN/scu-label-tool)
 >
-> 🧪 **Looking for lab labels?** → [Lab Label Printer](https://github.com/JamesSRN/lab-label-printer/releases)
+> 🧪 **Looking for lab labels?** → [Lab Label Printer](https://github.com/JamesSRN/lab-label-printer)
 
 ---
 
