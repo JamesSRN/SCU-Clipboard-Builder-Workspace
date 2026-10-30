@@ -72,12 +72,53 @@ EXCEPTION_FORMS_MAP = {
     "Welcome Packet": "welcome_packet.pdf",
 }
 
-APP_VERSION = "1.1.1"
+APP_VERSION = "1.2.0"
+
+# Visit tracker "Specialty" column (which specialty clinic the patient is seeing).
+# Matched exactly, because "specialty" is also part of "Specialty Clinics Consent".
+SPECIALTY_HEADER_LABELS = {"specialty", "specialty clinic name", "clinic"}
+
+# Short names shown in the app. Any specialty not listed here is kept exactly as typed,
+# so new clinics on the visit tracker work without an app update.
+SPECIALTY_SHORT_NAMES = {
+    "pcp": "PCP",
+    "allergy": "Allergy",
+    "cardiology": "Cardio",
+    "cardio": "Cardio",
+    "dermatology": "Derm",
+    "derm": "Derm",
+    "endocrinology": "Endo",
+    "endo": "Endo",
+    "gi": "GI",
+    "gastroenterology": "GI",
+    "general surgery": "Gen Surg",
+    "gen surg": "Gen Surg",
+    "hand surgery": "Hand Surg",
+    "hand surg": "Hand Surg",
+    "hand": "Hand Surg",
+    "hematology": "Heme",
+    "heme": "Heme",
+    "neurology": "Neuro",
+    "neuro": "Neuro",
+    "soma": "SOMA",
+    "ent": "ENT",
+    "pm&r": "PM&R",
+    "pmr": "PM&R",
+    "pm and r": "PM&R",
+    "psychiatry": "Psych",
+    "psych": "Psych",
+    "rheumatology": "Rheum",
+    "rheum": "Rheum",
+    "urology": "Uro",
+    "uro": "Uro",
+    "cct": "CCT",
+}
 
 INPUT_GRID_HEADERS = [
     "Time",
     "Patient Name",
     "DOB",
+    "Specialty",
     "Room",
     "Language",
     "Initial Visit Intake",
@@ -588,7 +629,6 @@ class ClinicApp(QMainWindow):
         ignored_headers = []
         ignored_source_indices = []
         skipped_name_headers = []
-        skipped_other_headers = []
         if pasted_headers:
             for source_idx, source_header in enumerate(pasted_headers):
                 mapped_idx = self._target_col_for_pasted_header(source_header)
@@ -598,8 +638,6 @@ class ClinicApp(QMainWindow):
                         pass  # blank header cell: nothing to paste, nothing to report
                     elif self._is_split_name_header(source_header):
                         skipped_name_headers.append(label)
-                    elif self._is_unused_tracker_header(source_header):
-                        skipped_other_headers.append(label)
                     else:
                         ignored_headers.append(label)
                         ignored_source_indices.append(source_idx)
@@ -714,12 +752,6 @@ class ClinicApp(QMainWindow):
                     + ", ".join(skipped_name_headers)
                     + ". Patient Name already includes first and last."
                 )
-            if skipped_other_headers:
-                self.log(
-                    "Skipped "
-                    + ", ".join(skipped_other_headers)
-                    + ". Not needed for clipboards."
-                )
         else:
             self.log("Pasted clipboard data into input spreadsheet.")
             QMessageBox.warning(
@@ -821,10 +853,13 @@ class ClinicApp(QMainWindow):
         if not normalized_source:
             # Blank header cells (e.g. side tables copied past the last column) map to nothing.
             return -1
+        if ClinicApp._is_specialty_header(source_header):
+            return INPUT_GRID_HEADERS.index("Specialty")
         header_aliases = [
             ["time"],
             ["patient name", "name"],
             ["date of birth", "dob"],
+            [],  # Specialty: exact match only, handled above
             ["room"],
             ["language"],
             ["initial visit intake"],
@@ -862,10 +897,35 @@ class ClinicApp(QMainWindow):
         }
 
     @staticmethod
-    def _is_unused_tracker_header(source_header):
-        """Visit tracker columns the clipboard does not need (Specialty)."""
+    def _is_specialty_header(source_header):
+        """Visit tracker Specialty column (not the Specialty Clinics Consent form column)."""
         label = " ".join(ClinicApp._normalize(source_header).split())
-        return label in {"specialty", "specialty clinic name", "clinic"}
+        return label in SPECIALTY_HEADER_LABELS
+
+    @staticmethod
+    def _short_specialty(value):
+        """Shorten known specialties (Cardiology -> Cardio). Unknown ones stay as typed.
+
+        Handles more than one specialty in a cell, e.g. "Dermatology, Neurology" -> "Derm, Neuro".
+        """
+        raw = ClinicApp._normalize_cell(value)
+        if not raw or raw.lower() == "nan":
+            return ""
+        parts = [part.strip() for part in re.split(r"\s*[,;/]\s*|\s+\+\s+", raw) if part.strip()]
+        short = []
+        for part in parts:
+            key = " ".join(part.lower().split())
+            name = SPECIALTY_SHORT_NAMES.get(key, part)
+            if name not in short:
+                short.append(name)
+        return ", ".join(short)
+
+    @staticmethod
+    def _find_specialty_col(headers):
+        for i, header in enumerate(headers):
+            if ClinicApp._is_specialty_header(header):
+                return i
+        return -1
 
     @staticmethod
     def _is_marked(value):
@@ -1081,6 +1141,7 @@ class ClinicApp(QMainWindow):
             col_dob = self._find_col(headers, ["date of birth", "dob"])
             col_room = self._find_col(headers, ["room"])
             col_language = self._find_col(headers, ["language"])
+            col_specialty = self._find_specialty_col(headers)
 
             if col_name < 0:
                 QMessageBox.warning(self, "Error", "Could not find a Name/Patient Name column.")
@@ -1117,12 +1178,16 @@ class ClinicApp(QMainWindow):
                 dob_val = row_vals[col_dob].strip() if 0 <= col_dob < len(row_vals) else ""
                 room_val = row_vals[col_room].strip() if 0 <= col_room < len(row_vals) else ""
                 lang_raw = row_vals[col_language].strip() if 0 <= col_language < len(row_vals) else ""
+                specialty_val = (
+                    row_vals[col_specialty].strip() if 0 <= col_specialty < len(row_vals) else ""
+                )
 
                 p = {
                     "name": name_val,
                     "dob": "" if self._normalize(dob_val) == "nan" else dob_val,
                     "room": "" if self._normalize(room_val) == "nan" else room_val,
                     "language": self._normalize_language(lang_raw),
+                    "specialty": self._short_specialty(specialty_val),
                     "selected_forms": [],
                 }
 
@@ -1146,8 +1211,9 @@ class ClinicApp(QMainWindow):
         ordered_forms = self._ordered_packet_forms(p["selected_forms"])
         total_forms = len(ordered_forms)
 
+        specialty_part = f"Specialty: {p['specialty']} | " if p.get("specialty") else ""
         patient_details = (
-            f"DOB: {p['dob']} | Room: {p['room']} | "
+            f"DOB: {p['dob']} | {specialty_part}Room: {p['room']} | "
             f"Language: {p['language'].title()} | Total Forms: {total_forms}"
         )
         patient_item = QTreeWidgetItem([p["name"], patient_details])
