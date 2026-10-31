@@ -73,7 +73,7 @@ EXCEPTION_FORMS_MAP = {
     "Welcome Packet": "welcome_packet.pdf",
 }
 
-APP_VERSION = "1.2.0"
+APP_VERSION = "1.2.1"
 
 # Visit tracker "Specialty" column (which specialty clinic the patient is seeing).
 # Matched exactly, because "specialty" is also part of "Specialty Clinics Consent".
@@ -1343,10 +1343,19 @@ class ClinicApp(QMainWindow):
                 writer.write(handle)
                 handle.flush()
                 os.fsync(handle.fileno())
-            shutil.copy2(tmp_path, dest_path)
+            # copyfile, not copy2: OneDrive/Box folders can refuse the metadata
+            # copy (permissions/flags) even when the file itself copies fine.
+            shutil.copyfile(tmp_path, dest_path)
         finally:
             if os.path.exists(tmp_path):
                 os.remove(tmp_path)
+
+    @staticmethod
+    def _safe_filename_part(value, fallback="unknown"):
+        """Keep letters, numbers, dash and dot. OneDrive, Box, macOS and Windows all accept the result."""
+        text = re.sub(r"[^A-Za-z0-9.-]+", "_", str(value or "").strip())
+        text = re.sub(r"_+", "_", text).strip("._")
+        return text[:60] or fallback
 
     def process_pdfs(self, batch=False):
         if not self.forms_dir:
@@ -1364,6 +1373,8 @@ class ClinicApp(QMainWindow):
 
         batch_writer = PdfWriter() if batch else None
         packets_ok = 0
+        failed = []
+        used_names = set()
 
         for p in self.patient_data:
             temp_top_sheet = None
@@ -1415,9 +1426,16 @@ class ClinicApp(QMainWindow):
                     )
                     continue
 
-                safe_name = p["name"].replace(" ", "_").replace(",", "")
-                safe_dob = p["dob"].replace("/", "-")
-                filename = f"Room_{p['room']}__{safe_name}__DOB_{safe_dob}.pdf"
+                safe_room = self._safe_filename_part(p["room"], "none")
+                safe_name = self._safe_filename_part(p["name"], "patient")
+                safe_dob = self._safe_filename_part(str(p["dob"]).replace("/", "-"), "none")
+                stem = f"Room_{safe_room}__{safe_name}__DOB_{safe_dob}"
+                filename = f"{stem}.pdf"
+                n = 2
+                while filename.lower() in used_names:
+                    filename = f"{stem}_{n}.pdf"
+                    n += 1
+                used_names.add(filename.lower())
                 final_path = os.path.join(output_dir, filename)
 
                 if batch:
@@ -1429,6 +1447,7 @@ class ClinicApp(QMainWindow):
                     self._write_pdf_atomically(packet_writer, final_path)
                 packets_ok += 1
             except Exception as e:
+                failed.append(f"{p['name']}: {e}")
                 self.log(f"Error processing {p['name']}: {e}", "ERROR")
             finally:
                 if temp_top_sheet and os.path.exists(temp_top_sheet):
@@ -1463,6 +1482,16 @@ class ClinicApp(QMainWindow):
             )
         else:
             self.log(f"Individual PDFs generated for {packets_ok} patient(s).")
+            lines = [f"Saved {packets_ok} of {len(self.patient_data)} clipboard PDFs to:", output_dir]
+            if failed:
+                lines += ["", "Not saved:"] + [f"- {item}" for item in failed[:10]]
+                if len(failed) > 10:
+                    lines.append(f"- ...and {len(failed) - 10} more (see log)")
+                lines += ["", "Try saving to Desktop, or use Generate Batch Print File."]
+            if packets_ok == 0 or failed:
+                QMessageBox.warning(self, "Some PDFs were not saved", "\n".join(lines))
+            else:
+                QMessageBox.information(self, "PDFs ready", "\n".join(lines))
 
 
 if __name__ == "__main__":
